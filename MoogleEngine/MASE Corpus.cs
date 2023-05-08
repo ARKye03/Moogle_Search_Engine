@@ -63,7 +63,7 @@ public class Corpus{
         int count = 0;
         foreach (var par in Docs)
         {
-            if (!par.Value.vocabulario.ContainsKey(palabra)) continue;
+            if (!par.Value.Vocabulary.ContainsKey(palabra)) continue;
             count++;
         }
         return Math.Log10((double)Docs.Count / (double)count);
@@ -72,38 +72,38 @@ public class Corpus{
     double IDF(string word){
         int count = 0;
         foreach (var par in Docs){
-            if (!par.Value.vocabulario.ContainsKey(word)) continue;
+            if (!par.Value.Vocabulary.ContainsKey(word)) continue;
             count++;
         }
         return Math.Log10((double)Docs.Count / (double)count);
     }
-    private void BuildGeneralFiler(string filename, int index){   
-        var data = new Data();
-        var count = 0; // Count of each word's index
-        var text = File.ReadAllText(Directory.GetFiles(Path, "*.txt")[index]).ToLower();
-        var words = text.Split(new char[] { ' ', ',', '.', ';', '?', '!', '¿', '¡', ':', '"' }, StringSplitOptions.RemoveEmptyEntries);
+    private void BuildGeneralFiler(string nombre, int i){   
+        Data data = new Data();
+        // Index count of each word
+        int count = 0; 
+        // Splitting with signos de puntuacion
 
-        foreach (var word in words){
+        string txt = File.ReadAllText(Directory.GetFiles(Path, "*.txt")[i]).ToLower();
+        string[] palabras = txt.Split(new char[] { ' ', ',', '.', ';', '?', '!', '¿', '¡', ':', '"' }, StringSplitOptions.RemoveEmptyEntries);
+        foreach (string word in palabras)
+        {
             if (word.Length == 1 && Char.IsPunctuation(word[0])) continue;
-            // Add word to document vocabulary with its index
-            if (!data.vocabulario.ContainsKey(word)){
-                data.vocabulario.Add(word, new List<int>());
+            // aqui voy guardando cada una de las palabras en el Vocabulary del documento con sus indices
+            if (!data.Vocabulary.ContainsKey(word)){
+                data.Vocabulary.Add(word, new List<int>());
                 data.pesos.Add(word, 0);
-            
                 if (!GeneralFiler.ContainsKey(word)){
-                GeneralFiler.Add(word, 0);
+                    GeneralFiler.Add(word, 0);
                 }
             }
-            data.vocabulario[word].Add(count);
-        
-            if (data.vocabulario[word].Count > data.MaxWordAppereance){
-                data.MaxWordAppereance = data.vocabulario[word].Count;
+            data.Vocabulary[word].Add(count);
+            if (data.Vocabulary[word].Count > data.MaxWordAppereance){
+                data.MaxWordAppereance = data.Vocabulary[word].Count;
             }
             count++;
         }
-    Docs.Add(filename, data);
-}
-
+        Docs.Add(nombre, data);
+    }
 }
 
 
@@ -118,22 +118,48 @@ public class Corpus{
         foreach (string word in palabras)
         {
             if (word.Length == 1 && Char.IsPunctuation(word[0])) continue;
-        // aqui voy guardando cada una de las palabras en el vocabulario del documento con sus indices
-            if (!data.vocabulario.ContainsKey(word))
+        // aqui voy guardando cada una de las palabras en el Vocabulary del documento con sus indices
+            if (!data.Vocabulary.ContainsKey(word))
             {
-                data.vocabulario.Add(word, new List<int>());
+                data.Vocabulary.Add(word, new List<int>());
                 data.pesos.Add(word, 0);
                 if (!GeneralFiler.ContainsKey(word))
                 {
                     GeneralFiler.Add(word, 0);
                 }
             }
-            data.vocabulario[word].Add(count);
-            if (data.vocabulario[word].Count > data.MaxWordAppereance)
+            data.Vocabulary[word].Add(count);
+            if (data.Vocabulary[word].Count > data.MaxWordAppereance)
             {
-                data.MaxWordAppereance = data.vocabulario[word].Count;
+                data.MaxWordAppereance = data.Vocabulary[word].Count;
             }
             count++;
         }
         Docs.Add(nombre, data);
     }*/
+    /*private void BuildGeneralFiler(string filename, int index){   
+        var data = new Data();
+        var count = 0; // Count of each word's index
+        var text = File.ReadAllText(Directory.GetFiles(Path, "*.txt")[index]).ToLower();
+        var words = text.Split(new char[] { ' ', ',', '.', ';', '?', '!', '¿', '¡', ':', '"' }, StringSplitOptions.RemoveEmptyEntries);
+
+        foreach (var word in words){
+            if (word.Length == 1 && Char.IsPunctuation(word[0])) continue;
+            // Add word to document vocabulary with its index
+            if (!data.Vocabulary.ContainsKey(word)){
+                data.Vocabulary.Add(word, new List<int>());
+                data.pesos.Add(word, 0);
+            
+                if (!GeneralFiler.ContainsKey(word)){
+                GeneralFiler.Add(word, 0);
+                }
+            }
+            data.Vocabulary[word].Add(count);
+        
+            if (data.Vocabulary[word].Count > data.MaxWordAppereance){
+                data.MaxWordAppereance = data.Vocabulary[word].Count;
+            }
+            count++;
+        }
+    Docs.Add(filename, data);
+}*/

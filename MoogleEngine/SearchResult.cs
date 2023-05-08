@@ -2,9 +2,9 @@ namespace MoogleEngine;
 
 public class SearchResult
 {
-    private SearchItem[] items;
+    public List<SearchItem> items;
 
-    public SearchResult(SearchItem[] items, string suggestion="")
+    public SearchResult(List<SearchItem> items, string suggestion="")
     {
         if (items == null) {
             throw new ArgumentNullException("items");
@@ -14,7 +14,7 @@ public class SearchResult
         this.Suggestion = suggestion;
     }
 
-    public SearchResult() : this(new SearchItem[0]) {
+    public SearchResult() : this(new List<SearchItem>()) {
 
     }
 
@@ -24,5 +24,5 @@ public class SearchResult
         return this.items;
     }
 
-    public int Count { get { return this.items.Length; } }
+    public int Count { get { return this.items.Count; } }
 }

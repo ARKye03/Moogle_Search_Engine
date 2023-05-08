@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using System.Diagnostics;
 
 <PageTitle>Moogle!</PageTitle>
 
@@ -10,7 +11,8 @@
 
 @if (!string.IsNullOrEmpty(result.Suggestion)) {
     <div class="suggestion">
-        <p>¿Quisiste decir <strong><a href="#">@result.Suggestion</a></strong>?</p>
+        <p>¿Quizas quisiste decir <strong><a href="#">@result.Suggestion</a></strong>?</p>
+        <p>Tomó @Timing segundos</p>
     </div>
 }
 
@@ -19,7 +21,8 @@
     <li>
         <div class="item">
             <p class="title">@item.Title</p>
-            <p>... @item.Snippet ...</p>
+            <p>-->  @item.Snippet ..</p>
+            <p>-->  @item.Score ...</p>
         </div>
     </li>
 }
@@ -28,8 +31,9 @@
 @code {
     private string query = "";
     private SearchResult result = new SearchResult();
-
+    public static double Timing = Moogle.Time;
     private void RunQuery() {
+        
         result = Moogle.Query(query);
     }
 }
