@@ -38,10 +38,10 @@
             - 2.1.3.1 Aquí se ejecuta la funcion Peso(), perteneciente a la clase Data(Explicada más adelante), pero no hace más que calcular el peso de cada palabra y darle valor modular al documento procesado en cuestión .
     - 2.2 En las anteriores funciones se utilizaba la función BuildGeneralFiler, la cual como su nombre indica, se encarga de construir en GeneralFiler(VocabularioGeneral), pero además procesar y desarrollar el diccionario "Docs".
         - 2.2.1 Aqui creo el objeto data `Data data = new Data();` y el conteo que indica cada palabra `int count = 0`
-        
+
         Esta zona del código fue un descubrimiento excepcional, estoy orgulloso de ello, horas en la página de Microsoft(no es broma)
 
-        ```C#
+    ```C#
         private void BuildGeneralFiler(string nombre, int i){   
         Data data = new Data();
         // Index count of each word
@@ -69,3 +69,23 @@
         Docs.Add(nombre, data);
     }
     ```
+
+    - 2.3.2 Como se puede ver, aquí ocurre casi toda la "magia", aquí se usan métodos propios de los diccionarios como "ContainsKey", "Add", etc. Aqui se va a separar el texto de cada documento por espacios y diferentes caracteres(como se observa arriba), y se va a ir almacenando cada palabra resultante en el vocabulario con sus indices, y finalmente se va a formar el Diccionario docs, con los nombres de los documentos y sus datos
+        - 2.3.2.1 Estos datos se van recopilando a lo largo del bucle foreach dentro de esta funcion BuildGeneralFiler
+    - 2.4 Data, la clase que contiene los datos de cada documento donde se calcula el peso de cada palabra en el documento que esté analizando en dicho momento, además le da valor a la variable "Module" del documento, que no es mas que el módulo del vector de peso
+
+    ```C#
+        public void Peso(Dictionary<string, double> GFiler){
+        foreach (var par in pesos){
+            pesos[par.Key] = (double)Vocabulary[par.Key].Count / (double)MaxWordAppereance * GFiler[par.Key];
+            Module += Math.Pow(pesos[par.Key], 2);
+        }
+        Module = Math.Sqrt(Module);
+    }
+    ```
+
+    - 2.4.1 Otros valores da Data
+        - int MaxWordAppereance = 0; -> Frecuencia de la palabra que más aparece
+        - Dictionary Vocabulary -> Este es el vocabulario del documento contra los indices de las palabras de ese vocabulario
+
+3. 
