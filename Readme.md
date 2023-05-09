@@ -23,7 +23,9 @@
 ### Funcionamiento
 
 1. Primeramente el programa inicia en "Program.cs"
+
     `Moogle.LetsGetStarted(@"..//Content");` Ln-5
+    
     Esta es la función invocada presente en "Moogle.cs"
     `public static void LetsGetStarted(string path){ corpus = new Corpus(path); }`
    - 1.1 Aqui se le da paso al motor de busqueda, que tratará de crear el Diccionario "GeneralFiler" que contendrá todas las palabras de los documentos 'MASE Corpus -> Ln4'
