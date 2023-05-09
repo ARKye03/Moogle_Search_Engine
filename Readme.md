@@ -40,24 +40,39 @@
         - 2.2.1 Aqui creo el objeto data `Data data = new Data();` y el conteo que indica cada palabra `int count = 0`
         
         Esta zona del código fue un descubrimiento excepcional, estoy orgulloso de ello, horas en la página de Microsoft(no es broma)
-
+        
         `string txt = File.ReadAllText(Directory.GetFiles(Path, "*.txt")[i]).ToLower();`
         
         `string[] palabras = txt.Split(new char[] { ' ', ',', '.', ';', '?', '!', '¿', '¡', ':', '"' }, StringSplitOptions.RemoveEmptyEntries);`
+
         `foreach (string word in palabras){`
-        `if (word.Length == 1 && Char.IsPunctuation(word[0])) continue`
-        `if (!data.Vocabulary.ContainsKey(word)){`
-        `data.Vocabulary.Add(word, new List<int>());`
-        `data.pesos.Add(word, 0);`
-        `if (!GeneralFiler.ContainsKey(word)){`
-        `GeneralFiler.Add(word, 0);`
-        `}`
-        `}`
-        `data.Vocabulary[word].Add(count);`
-        `if (data.Vocabulary[word].Count > data.MaxWordAppereance){`
-        `data.MaxWordAppereance = data.Vocabulary[word].Count;`
-        `}`
-        `count++;`
+
+        `   if (word.Length == 1 && Char.IsPunctuation(word[0])) continue`
+
+        `   if (!data.Vocabulary.ContainsKey(word)){`
+
+        `       data.Vocabulary.Add(word, new List<int>());`
+
+        `       data.pesos.Add(word, 0);`
+
+        `       if (!GeneralFiler.ContainsKey(word)){`
+
+        `           GeneralFiler.Add(word, 0);`
+
+        `       }`
+
+        `   }    `
+
+        `   data.Vocabulary[word].Add(count);`
+
+        `   if (data.Vocabulary[word].Count > data.MaxWordAppereance){`
+
+        `       data.MaxWordAppereance = data.Vocabulary[word].Count;`
+
+        `   }`
+
+        `   count++;`
+
         `}`
         `Docs.Add(nombre, data);`
     `}`
