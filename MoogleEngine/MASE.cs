@@ -319,7 +319,7 @@ public class Score{
         return true;
     }
     
-    // si existe algun par de palabras en la lista de Closeness,  modifica el score de los documentos dependiendo de la Closeness entre los terminos q pertenecen a dicha lista
+    // si existe algun par de palabras en la lista de Closeness,  modifica el score de los documentos dependiendo de la cercania entre los terminos q pertenecen a dicha lista
     public void ModScore(int i){
         if (searcher.Closeness.Count == 0) return;
         for (int j = 0; j < searcher.Closeness.Count; j++)

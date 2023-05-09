@@ -88,4 +88,171 @@
         - int MaxWordAppereance = 0; -> Frecuencia de la palabra que más aparece
         - Dictionary Vocabulary -> Este es el vocabulario del documento contra los indices de las palabras de ese vocabulario
 
-3. 
+3. MASE Consulta(Seacher) y Puntaje(Score)
+
+    - 3.1 El constructor de la clase, recibe la entrada del usuario(Query) desde el apartado grafico, y un Corpus(El ya creado anteriormente y creado al inicio del proyecto)
+        - `UsrInp` es la consulta del usuario ya procesada, por el metodo ProcessQuery, que lo que hace no es más que separar en terminos la consulta
+        - `LetMeIn`(Lista de Inclusion), `LetMeOut`(Lista de Exclusion), `Closeness`(Lista de cercanía), se encargaran de recibir los terminos de la búsqueda según los operadores colocados.
+        - `GetInfo`, es la función casi que más caótica, aquí primeramente se separan los terminos segun sus operadores, posteriormente cada palabra de la consulta va para el diccionario `Frqhzy` con su cantidad de repeticiones:
+
+    ```C#
+    if (!Frqhzy.ContainsKey(UsrInp[i])){
+                Frqhzy.Add(UsrInp[i], 0);
+            }
+            Frqhzy[UsrInp[i]] += count1 + 1;
+            if (MaxWordAppereance < Frqhzy[UsrInp[i]]){
+                MaxWordAppereance = Frqhzy[UsrInp[i]];
+            }
+        }
+        UsrInp = new string[Frqhzy.Count];
+        foreach (var par in Frqhzy)
+        {
+            UsrInp[count] = par.Key;
+            count++;
+        }
+    ```
+
+    - 3.1
+
+        - Luego en la linea 43, el corpus declarado en esta clase searcher, pasa a ser el corpus enviado a consultar
+        - `GSuggest`, funcion que usando la distancia de Levensthein(Aun no optimizada), sustituye las palabras mal escritas o no encontradas de la consulta, por otras posiblemente más adecuadas. Además incorpora el método `Suggestion()`
+            - `Suggestion()`
+
+            ```C#
+            private static string Suggestion(string word, Corpus corpus){
+            string suggestion = "";
+
+            if (!corpus.GeneralFiler.ContainsKey(word)){
+                for (int i = 1; i < word.Length / 3 + 1; i++){
+                    foreach (var pair in corpus.GeneralFiler){
+                        if (LevenstheinDistance(word, pair.Key) == i){ suggestion = Compare(suggestion, pair.Key, word, corpus); }
+                    }
+                    if (suggestion != "") return suggestion;
+                }
+            }
+            return suggestion;
+            }
+            ```
+
+            Usando la `distancia de Levensthein`(No optimizada aún), recorre palabra por palabra, para buscar por poca diferencia, la palabra más semejante de la consulta, para finalmente devolverla.
+            [Mi idea es crear al inicio un diccionario extra, o varios, que abarquen todo el Vocabualrio de mis Docs y ordene por tamaño todas las palabras, asó a la hora de sugerir una palabra solo tendría que calcular con palabras 1 caracter más o menos grande, o de igual tamaño]
+        - `Snippets = new string[corpus.Docs.Count]` crea el string Snippets con longitud igual a la cantidad de documentos, este string pues almacenará eso, los snippets con score != 0
+        - `WVal = new double[UsrInp.Length]` es un array de dobles, que tendrá los valores de los terminos de la consulta, con capacidad == cantidad de terminos del UsrInp(Consulta).
+        - `Save_W_Value()` usando la conocida formula de TF*IDF, pues calcula los valores de peso de los terminos de la consulta. MASE LN -> 57
+        - `Mod()` Calculará el vector de pesos de la consulta
+
+        ```C#
+        public void Mod(){
+        for (int i = 0; i < WVal.Length; i++){
+            Module += Math.Pow(WVal[i], 2);
+        }
+        Module = Math.Sqrt(Module);
+        }
+        ```
+
+        - `FillSuggest()` Metodo que modifica la sugerencia a devolver.
+
+4. Score
+    - 4.1 Clase que guardará los puntajes de cada documento, para finalmente ser mostrado en el partado gráfico
+        - `public Searcher searcher` Se declara una consulta
+        - `public Corpus Corpus` Se declara un corpus
+        - `public (string, double)[] tupla` Se declara este array que será de igual tamaño que la cantidad de documentos, ademas almacena sus puntajes.
+    - 4.2 El constructor de esta clase
+        - Comienza recibiendo y tomando una consulta y un corpus
+        - Como había dicho, la tupla se crea, con igual longitud que la cantidad de documentos
+        - `FillScores()` función que ordena las tuplas de mayor a menor, luego de haber ejecutado un producto vectorial con la funcion VecMultiply:
+
+        ```C#
+        public double VecMultiply(int i){
+        if (!ValidateDoc(i) || searcher.Module == 0) return 0;
+        double suma = 0;
+        for(int j = 0; j< searcher.Frqhzy.Count;j++){
+            if (!Corpus.Docs.ElementAt(i).Value.pesos.ContainsKey(searcher.Frqhzy.ElementAt(j).Key)) continue;
+            suma += Corpus.Docs.ElementAt(i).Value.pesos[searcher.Frqhzy.ElementAt(j).Key] * searcher.WVal[j];
+        }
+        suma = suma / (searcher.Module * Corpus.Docs.ElementAt(i).Value.Module);
+        return suma;
+        }
+        ```
+
+        - Esta funcion de `FillScores()`, tambien da inicio a la función `FillSnippet(tupla)` que va rellenando los snippet(Ver más adelante en la sección 5), además usa un metodo para modifcar el score, llamada `ModScore()`, que depende de si alguna(s) palabra(s), perteneces a la lista de Closeness y por tanto cambia el score en dependencia de la cercania entre esos terminos. Además usa un `BubbleSort()`, el metodo de sorteo más sencillo, recorre los terminos a pares y los intercambia si estan en el lugar equivocado.
+        - El metodo `ModScore()` usa además la función `LowestDistance`, que como su nombre indica devuelve la menor distancia entre dos términos en un documento.
+    - 4.3 Además uso varias funciones extras como:
+        - `Swap()` Simple funcion que cambia dos elementos de lugar en un array.
+        - `TotalWeight()` Metodo que suma y devuelve los pesos de una palabra en cada aparicion de esta en cada documento. Se usa en la funcion `Compare()`.
+        - `ValidateDoc()` Funcion que otorgará puntaje igual a 0 a aquellos documentos que contengan una palabra exluida y tambien otorgará 0 a cada documento que no contenga a una palabra incluida.
+        - `Compare()` metodo presente en la clase Searcher, Ln -> 199, que se encargará de devolver entre dos palabras, la más importante usando el método `TotalWeight()`.
+5. Snippets
+
+    - 5.1 `FillSnippet()` es la función, que se encarga de llenar los snippets de aquellos documentos que pasaron el Score(!=0)
+
+        - Usa el hilo "Relevant" sinónimo de MASIMPORTANTE, que contendrá la palabra con la cual se presentará el Snippet más adelante.
+        - Al final de la función se invoca el método `RetSnippet()`.
+    - 5.2 `RetSnippet()` Esta recibirá, esa palabra "Relevant" y el documento donde se encuentre y creará un snippet que contenga esa palabra.
+6. Cambios en `SearchItem` y `SearchResult`
+    - 6.1 `SearchItem` Score, lo cambié de float a double.
+    - 6.2 `SearchResult`
+        - No declaro un objeto `SearchItem[]`, sino una `List<SearchItem> items`, del mismo nombre.
+        - El constructor de esta clase ahora recibe `List<SearchItem> items`, y su sobrecarga ahora hereda una Lista igualmente.
+        - La variable "Count" devuelve `this.items.Count` en lugar de `this.items.Length`
+
+    ```C#
+    public class SearchResult
+    {
+    -public List<SearchItem> items;-
+
+    public SearchResult(--List<SearchItem>-- items, string suggestion="")
+    {
+        if (items == null) {
+            throw new ArgumentNullException("items");
+        }
+
+        this.items = items;
+        this.Suggestion = suggestion;
+    }
+
+    public SearchResult() : this(new --List<SearchItem>()--) {
+
+    }
+
+    public string Suggestion { get; private set; }
+
+    public IEnumerable<SearchItem> Items() {
+        return this.items;
+    }
+
+    public int Count { get { return --this.items.Count;-- } }
+    }
+    ```
+
+7. Retornando al inicio
+    - 7.1 La clase Moogle ahora:
+        - Declara un corpus, el mismo que da inicio al programa, y el cual se usará para la búsqueda.
+        - Declara una `Consulta(searcher)`, la cual hará todos los pasos y metodos anteriormente explicados.
+        - Declara un Score, puntaje que una vez procesado, será mostrado en pantalla, una vez culmine la búsqueda
+        - Un cronómetro(No Funcional... por ahora) que mostrará cuanto tardó la consulta Google-like
+        - Finalmente método "Query" de tipo `SearchResult`
+            - Dará inicio al cronómetro
+            - Dará orden de inicio a Searcher
+            - Dará orden de inicio a Score
+        - Esta función "Query" devolverá los "items"(Titulo, Snippet, Score) y la sugerencia final.
+    - 7.2 En Index.razor
+        - Existe una nueva variable double que tendrá el valor en segundos del tiempo tomado en procesar la consulta.
+        - A esta región le agregué el "Score".
+
+        ```Blazor
+        <ul class="results">
+        @foreach (var item in result.Items()) {
+            <li>
+                <div class="item">
+                    <p class="title">@item.Title</p>
+                    <p>-->  @item.Snippet ..</p>
+                    <p>-->  @item.Score ...</p>
+                </div>
+            </li>
+        }
+        </ul>
+        ```
+
+        - Debajo de la sugerencia irá el tiempo tomado. (Se me ocurrió a ultima hora).
+8. Fin. 😁😁😁😁😁😁😁😁😁😁😁😁😁😁
