@@ -85,8 +85,7 @@ public class Corpus{
 
         string txt = File.ReadAllText(Directory.GetFiles(Path, "*.txt")[i]).ToLower();
         string[] palabras = txt.Split(new char[] { ' ', ',', '.', ';', '?', '!', '¿', '¡', ':', '"' }, StringSplitOptions.RemoveEmptyEntries);
-        foreach (string word in palabras)
-        {
+        foreach (string word in palabras){
             if (word.Length == 1 && Char.IsPunctuation(word[0])) continue;
             // aqui voy guardando cada una de las palabras en el Vocabulary del documento con sus indices
             if (!data.Vocabulary.ContainsKey(word)){
