@@ -2,16 +2,16 @@
 
 >--Moogle Advanced Search Engine--
 
-![](moogle.png)
+![](moogle.png "Best Search Engine")
 
 > 1er Proyecto de Programación
-
+>
 > MatCom
-
+>
 > Curso 2023-24
-
+>
 > Grupo: C-122
-
+>
 > Estudiante: Rafael A. Sánchez Martínez
 
 ## Features
@@ -26,7 +26,10 @@
 
 ## Funcionamiento
 
-1. Primeramente el programa inicia en "Program.cs"
+---
+
+1. Inicio
+   - El programa inicia en `"Program.cs"`
 
     `Moogle.LetsGetStarted(@"..//Content");` Ln-5
 
@@ -74,9 +77,9 @@
     }
     ```
 
-    - 2.3.2 Como se puede ver, aquí ocurre casi toda la "magia", aquí se usan métodos propios de los diccionarios como "ContainsKey", "Add", etc. Aqui se va a separar el texto de cada documento por espacios y diferentes caracteres(como se observa arriba), y se va a ir almacenando cada palabra resultante en el vocabulario con sus indices, y finalmente se va a formar el Diccionario docs, con los nombres de los documentos y sus datos
-        - 2.3.2.1 Estos datos se van recopilando a lo largo del bucle foreach dentro de esta funcion BuildGeneralFiler
-    - 2.4 Data, la clase que contiene los datos de cada documento donde se calcula el peso de cada palabra en el documento que esté analizando en dicho momento, además le da valor a la variable "Module" del documento, que no es mas que el módulo del vector de peso
+    - 2.3.2 Como se puede ver, aquí ocurre casi toda la "magia", aquí se usan métodos propios de los diccionarios como `"ContainsKey"`, `"Add"`, etc. Aqui se va a separar el texto de cada documento por espacios y diferentes caracteres(como se observa arriba), y se va a ir almacenando cada palabra resultante en el vocabulario con sus indices, y finalmente se va a formar el Diccionario docs, con los nombres de los documentos y sus datos
+        - 2.3.2.1 Estos datos se van recopilando a lo largo del bucle foreach dentro de esta funcion `BuildGeneralFiler`
+    - 2.4 Data, la clase que contiene los datos de cada documento donde se calcula el peso de cada palabra en el documento que esté analizando en dicho momento, además le da valor a la variable `"Module"` del documento, que no es mas que el módulo del vector de peso
 
     ```C#
         public void Peso(Dictionary<string, double> GFiler){
@@ -231,10 +234,10 @@
 
 7. Retornando al inicio
     - 7.1 La clase Moogle ahora:
-        - Declara un corpus, el mismo que da inicio al programa, y el cual se usará para la búsqueda.
+        - Declara un `Corpus`, el mismo que da inicio al programa, y el cual se usará para la búsqueda.
         - Declara una `Consulta(searcher)`, la cual hará todos los pasos y metodos anteriormente explicados.
-        - Declara un Score, puntaje que una vez procesado, será mostrado en pantalla, una vez culmine la búsqueda
-        - Un cronómetro(No Funcional... por ahora) que mostrará cuanto tardó la consulta Google-like
+        - Declara un `Score`, puntaje que una vez procesado, será mostrado en pantalla, una vez culmine la búsqueda
+        - Un cronómetro(No Funcional... por ahora) que mostrará cuanto tardó la consulta (Google-like)
         - Finalmente método "Query" de tipo `SearchResult`
             - Dará inicio al cronómetro
             - Dará orden de inicio a Searcher
@@ -244,7 +247,7 @@
         - Existe una nueva variable double que tendrá el valor en segundos del tiempo tomado en procesar la consulta.
         - A esta región le agregué el "Score".
 
-        ```Blazor
+        ```C#
         <ul class="results">
         @foreach (var item in result.Items()) {
             <li>
@@ -259,4 +262,4 @@
         ```
 
         - Debajo de la sugerencia irá el tiempo tomado. (Se me ocurrió a ultima hora).
-8. Fin. 😁😁😁😁😁😁😁😁😁😁😁😁😁😁
+8. Fin. 😁😁😁

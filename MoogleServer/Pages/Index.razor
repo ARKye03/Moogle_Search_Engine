@@ -1,13 +1,16 @@
 ﻿@page "/"
 @using System.Diagnostics;
 
+<img src="images/MoogleLogo.png" width="470" height="220"/>
+
 <PageTitle>Moogle!</PageTitle>
 
-<h1>🔍 Moogle!</h1>
+<!-- <h1>🔍 Moogle!</h1> -->
+<h6></h6>
 
-<input class="p-1 my-4" @bind="query" placeholder="Introduzca su búsqueda">
+<input class="p-1 my-4" @bind="query" placeholder="What do you want?">
 
-<button type="default" class="btn btn-primary" @onclick="RunQuery">🔍 Buscar</button>
+<button type="default" class="btn btn-primary" @onclick="RunQuery">🔍 Search</button>
 
 @if (!string.IsNullOrEmpty(result.Suggestion)) {
     <div class="suggestion">
