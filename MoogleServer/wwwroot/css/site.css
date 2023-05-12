@@ -2,8 +2,27 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background-color: #292929;
+    height: 100%;
+    /*background-image: url("../images/UnBlurredBG.jpg") blur(4px);*/
+    /*background-color: #ff0000;*/
 }
+.background-image {
+    background-image: linear-gradient(rgba(3, 14, 78, 0.438), rgba(24, 39, 124, 0.397)), url("../images/UnBlurredBG.jpg");
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(1px); /* Ajusta el valor de difuminado según tus preferencias */
+}
+.LoopImage {
+    background-image: url("../images/Lupa.png");
+}
+
 
 h1:focus {
     outline: none;
