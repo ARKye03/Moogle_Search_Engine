@@ -17,7 +17,7 @@ public class Searcher{
     //Snippets
     public string[] Snippets;
     //Path idk why, but I will leave it, for fun
-    static string path = (@"..\content");
+    //static string path = (@"..\content");
     //Repeticiones de una palabra
     public Dictionary<string, int> Frqhzy = new Dictionary<string, int>();
     // Max word frzhcy
@@ -31,7 +31,7 @@ public class Searcher{
     public List<(string, string)> Closeness;
 
     //Hilo que guarda la Suggestion que no he hecho, pero mi abuela me dijo que siempre hay que pensar en el futuro
-    public string _suggestion;
+    public string? _suggestion;
 
     public Searcher(string Query, Corpus corpus){
         //this.UserInput = Query;
