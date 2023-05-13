@@ -27,7 +27,7 @@ public static class Moogle
             items.Add(new SearchItem(score.tupla[i].Item1.Substring(12), searcher.Snippets[i], score.tupla[i].Item2));
         }
         Timer.Stop();
-        return new SearchResult(items, searcher._suggestion);
+        return new SearchResult(items, searcher._suggestion!);
 
         //return new SearchResult(items, query);
     }

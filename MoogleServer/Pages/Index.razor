@@ -2,56 +2,19 @@
 @inject IWebHostEnvironment WebHostEnvironment
 @using System.Diagnostics;
 
-<img src="images/MoogleLogo.png" width="600" height="180"/>
+<img src="images/MoogleLogo.png" alt="Beautiful_Moogle_Logo" width="600" height="180" @onmouseover="(() => AnimateImage(true))" @onmouseout="(() => AnimateImage(false))" style="@imageStyle"/>
 <!-- <img class="MoogleLogo"/> -->
 
 <div class="background-image"></div>
-
-<!-- Burbujas para el fondo, nada relevante
-<div class="container">
-    <div class="Bubbles">
-        <span site="--i:11;"></span>
-        <span site="--i:25;"></span>
-        <span site="--i:42;"></span>
-        <span site="--i:32;"></span>
-        <span site="--i:43;"></span>
-        <span site="--i:17;"></span>
-        <span site="--i:16;"></span>
-        <span site="--i:32;"></span>
-        <span site="--i:85;"></span>
-        <span site="--i:43;"></span>
-        <span site="--i:23;"></span>
-        <span site="--i:43;"></span>
-        <span site="--i:11;"></span>
-        <span site="--i:25;"></span>
-        <span site="--i:42;"></span>
-        <span site="--i:32;"></span>
-        <span site="--i:43;"></span>
-        <span site="--i:17;"></span>
-        <span site="--i:16;"></span>
-        <span site="--i:32;"></span>
-        <span site="--i:85;"></span>
-        <span site="--i:43;"></span>
-        <span site="--i:23;"></span>
-        <span site="--i:43;"></span>
-        <span site="--i:34;"></span>
-        <span site="--i:24;"></span>
-        <span site="--i:75;"></span>
-        <span site="--i:12;"></span>
-        <span site="--i:34;"></span>
-        <span site="--i:55;"></span>
-    </div>
-</div> 
--->
 
 <PageTitle>Moogle!</PageTitle>
 
 <!-- <h1>🔍 Moogle!</h1> -->
 <h6></h6>
 
-<input class="p-1 my-4" @bind="query" placeholder="What do you want?">
+<input class="SearchBox" @bind="query" @onkeyup="RunQuery" placeholder="Let's search with Moogle!">
 
-<button type="default" class="btn btn-primary" @onclick="RunQuery">🔍 Search</button>
+<button type="default" class="btn btn-primary" @onclick="RunQuery">🔍</button>
 
 @if (!string.IsNullOrEmpty(result.Suggestion)) {
     <div class="suggestion">
@@ -79,5 +42,14 @@
     private void RunQuery() {
         
         result = Moogle.Query(query);
+    }
+    //Animate Logo
+    bool isHovered = false;
+    string imageStyle = "";
+
+    void AnimateImage(bool hovered)
+    {
+        isHovered = hovered;
+        imageStyle = isHovered ? "transform: scale(1.2); transition: transform 0.3s ease;" : "transform: scale(1); transition: transform 0.3s ease;";
     }
 }
