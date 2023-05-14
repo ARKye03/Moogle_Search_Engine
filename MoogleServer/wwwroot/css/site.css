@@ -1,6 +1,5 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
-*
-{
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -30,7 +29,7 @@ html, body {
     color: #ffffff93;
 }
 .background-image {
-    background-image: linear-gradient(rgba(3, 14, 78, 0.438), rgba(24, 39, 124, 0.397)), url("../images/UnBlurredBG.jpg");
+    background-image: linear-gradient(rgba(0, 3, 20, 0.849), rgba(24, 39, 124, 0.397)), url("../images/UnBlurredBG.jpg");
     position: fixed;
     top: 0;
     left: 0;
@@ -42,22 +41,6 @@ html, body {
     background-size: cover;
     filter: blur(3px); /* Ajusta el valor de difuminado según tus preferencias */
 }
-/*.MoogleLogo{
-    background-image: url("../images/MoogleLogo.png");
-    background-repeat: no-repeat;
-    position: fixed;
-    align-items: center;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 600;
-    height: 180;
-}
-.MoogleLogo:hover input{
-    width: 400px;
-}*/
-
 h1:focus {
     outline: none;
 }

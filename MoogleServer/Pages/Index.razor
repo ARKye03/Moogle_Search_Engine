@@ -1,8 +1,11 @@
 ﻿@page "/"
 @inject IWebHostEnvironment WebHostEnvironment
 @using System.Diagnostics;
+@using Microsoft.AspNetCore.Components;
+@inject NavigationManager NavigationManager
 
 <PageTitle>Moogle!</PageTitle>
+
 <img src="images/MoogleLogo.png" alt="Beautiful_Moogle_Logo" width="600" height="180" @onmouseover="(() => AnimateImage(true))" @onmouseout="(() => AnimateImage(false))" style="@imageStyle"/>
 
 <h1></h1>
@@ -14,7 +17,7 @@
 
 <button type="default" class="btn btn-primary" @onclick="RunQuery">🔍</button>
 
-@if (!string.IsNullOrEmpty(result.Suggestion)) {
+@if (!string.IsNullOrEmpty(result.Suggestion) /*&& query.ToLower() != result.Suggestion*/) {
     <div class="suggestion">
         <p>Did you mean <strong><a href="#">@result.Suggestion</a></strong>?</p>
        <!-- <p>Tomó @Timing segundos</p> -->
@@ -24,8 +27,8 @@
 <ul class="results">
 @foreach (var item in result.Items()) {
     <li>
-        <div class="item">
-            <p class="title">@item.Title</p>
+        <div class="fade-in-animation">
+            <p class="title" >@item.Title</p>
             <p>-->  @item.Snippet ..</p>
             <p>-->  @item.Score ...</p>
         </div>
