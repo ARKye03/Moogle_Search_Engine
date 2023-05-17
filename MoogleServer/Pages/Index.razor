@@ -48,8 +48,7 @@
     bool isHovered = false;
     string imageStyle = "";
 
-    void AnimateImage(bool hovered)
-    {
+    void AnimateImage(bool hovered){
         isHovered = hovered;
         imageStyle = isHovered ? "transform: scale(1.2); transition: transform 0.3s ease;" : "transform: scale(1); transition: transform 0.3s ease;";
     }

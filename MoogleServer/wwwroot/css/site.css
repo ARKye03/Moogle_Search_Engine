@@ -29,7 +29,7 @@ html, body {
     color: #ffffff93;
 }
 .background-image {
-    background-image: linear-gradient(rgba(0, 3, 20, 0.849), rgba(24, 39, 124, 0.397)), url("../images/UnBlurredBG.jpg");
+    background-image: linear-gradient(rgba(0, 4, 24, 0.952), rgba(24, 39, 124, 0.397)), url("../images/UnBlurredBG.jpg");
     position: fixed;
     top: 0;
     left: 0;

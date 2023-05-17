@@ -2,6 +2,7 @@
 //Aqui proceso la searcher    \^-^/
 //                              |
 //                             / \ 
+using System.Text.RegularExpressions;
 
 namespace MoogleEngine{
 
@@ -148,6 +149,8 @@ public class Searcher{
     }
     public string RetSnippet(string txt, string Relevant)
     {
+        //Relevant = Regex.Replace(Relevant.Normalize(), @"[^a-zA-z0-9 ]+", "");
+        //Relevant=Regex.Replace(Relevant, @"[^a-zA-z0-9 ]+", "");
         while (true)
         {
             // esta condicion es para seleccionar un snippet q contenga a la palabra mas importante de manera exacta
