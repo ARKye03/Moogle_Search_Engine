@@ -7,8 +7,6 @@ using System.Text.RegularExpressions;
 namespace MoogleEngine{
 
 public class Searcher{
-    //Query
-    //public string UserInput = "";
     //Splitted Query
     public string[] UsrInp;
     //Words values for Splitted Query
@@ -17,11 +15,9 @@ public class Searcher{
     public Corpus corpus;
     //Snippets
     public string[] Snippets;
-    //Path idk why, but I will leave it, for fun
-    //static string path = (@"..\content");
     //Repeticiones de una palabra
     public Dictionary<string, int> Frqhzy = new Dictionary<string, int>();
-    // Max word frzhcy
+    // Max word frqhzy
     public int MaxWordAppereance = 0;
     // Module del vector de WVal -> Valor |WVal|
     public double Module = 0; //No se si esto que tambien lo puse en Data se puede optimizar no se me ocurre, pero da iwal
@@ -81,30 +77,25 @@ public class Searcher{
         {
             int count1 = 0;
 
-            if (UsrInp[i][0] == '!')
-            {
+            if (UsrInp[i][0] == '!'){
                 UsrInp[i] = UsrInp[i].Substring(1);
                 LetMeOut.Add(UsrInp[i]);
             }
-            if (UsrInp[i][0] == '^')
-            {
+            if (UsrInp[i][0] == '^'){
                 UsrInp[i] = UsrInp[i].Substring(1);
                 LetMeIn.Add(UsrInp[i]);
             }
-
-            while (UsrInp[i][0] == '*')
-            {
+            while (UsrInp[i][0] == '*'){
                 UsrInp[i] = UsrInp[i].Substring(1);
                 count1++;
 
             }
-            if (UsrInp[i] == "~")
-            {
+            if (UsrInp[i] == "~"){
                 Closeness.Add((UsrInp[i - 1], UsrInp[i + 1]));
                 continue;
             }
              // hasta aqui el metodo lo q hace es añadir las palabras con operadores a sus listas correspondientes
-
+            //-------------------------------------------------------------------------------------------------------\\
              // Cada palabra de la searcher va para el diccionario Frqhzy(frqhzy) con su cantidad de repeticiones
 
             if (!Frqhzy.ContainsKey(UsrInp[i])){
@@ -116,24 +107,19 @@ public class Searcher{
             }
         }
         UsrInp = new string[Frqhzy.Count];
-        foreach (var par in Frqhzy)
-        {
+        foreach (var par in Frqhzy){
             UsrInp[count] = par.Key;
             count++;
         }
     }
     public void FillSnippet((string, double)[] tupla){
-        for (int i = tupla.Length - 1; i > -1 && tupla[i].Item2 != 0; i--)
-        {
+        for (int i = tupla.Length - 1; i > -1 && tupla[i].Item2 != 0; i--){
             string Relevant = ""; // esta variable contendra el termino mas importante de los presentes en el documento i, el cual estara presente en el snippet
-            for (int j = 0; j < Frqhzy.Count; j++)
-            {
+            for (int j = 0; j < Frqhzy.Count; j++){
                 if (!corpus.Docs[tupla[i].Item1].pesos.ContainsKey(Frqhzy.ElementAt(j).Key)) continue;
                 Relevant = Frqhzy.ElementAt(j).Key;
             }
-
-            for (int j = 0; j < Frqhzy.Count; j++)
-            {
+            for (int j = 0; j < Frqhzy.Count; j++){
                 if (!corpus.Docs[tupla[i].Item1].pesos.ContainsKey(Frqhzy.ElementAt(j).Key)) continue;
                 if (corpus.Docs[tupla[i].Item1].pesos[Frqhzy.ElementAt(j).Key] > corpus.Docs[tupla[i].Item1].pesos[Relevant])
                 {
@@ -147,24 +133,20 @@ public class Searcher{
             Snippets[i] = RetSnippet(txt, Relevant);
         }
     }
-    public string RetSnippet(string txt, string Relevant)
-    {
+    public string RetSnippet(string txt, string Relevant){
         //Relevant = Regex.Replace(Relevant.Normalize(), @"[^a-zA-z0-9 ]+", "");
         //Relevant=Regex.Replace(Relevant, @"[^a-zA-z0-9 ]+", "");
-        while (true)
-        {
+        while (true){
             // esta condicion es para seleccionar un snippet q contenga a la palabra mas importante de manera exacta
             if ((!(Char.IsPunctuation(txt[txt.IndexOf(Relevant) - 1])) && !(txt[txt.IndexOf(Relevant) - 1] == ' ')) || (!(Char.IsPunctuation(txt[txt.IndexOf(Relevant) + Relevant.Length])) && !(txt[txt.IndexOf(Relevant) + Relevant.Length] == ' ')))
             {
                 txt = txt.Substring(txt.IndexOf(Relevant) + Relevant.Length);
                 continue;
             }
-            if (txt.IndexOf(Relevant) < 50)
-            {
+            if (txt.IndexOf(Relevant) < 50){
                 return txt.Substring(0, 100);
             }
-            if (txt.IndexOf(Relevant) > txt.Length - 50)
-            {
+            if (txt.IndexOf(Relevant) > txt.Length - 50){
                 return txt.Substring(txt.Length - 100);
             }
             return txt.Substring(txt.IndexOf(Relevant) - 50, 100);
@@ -173,8 +155,8 @@ public class Searcher{
     public void GSuggest(Dictionary<string,int> Frequency, Corpus corpus){
         for(int i = 0;i<UsrInp.Length;i++){
             if(Suggestion(UsrInp[i],corpus)=="")continue;
-            else {
-                
+
+            else {    
                 if(Frequency.ContainsKey(UsrInp[i])){
                 Frequency.Add(Suggestion(UsrInp[i],corpus), Frequency[UsrInp[i]]);  /*------*/
                 Frequency.Remove(UsrInp[i]);
@@ -183,7 +165,6 @@ public class Searcher{
             }
         }
     }
-    
     // A tirar la casa por la ventana, no hay más, palabra a palabra para _suggestion lo mejor LOL
     private static string Suggestion(string word, Corpus corpus){
             string suggestion = "";
@@ -211,7 +192,7 @@ public class Searcher{
             _suggestion = _suggestion + UsrInp[i] + " "; 
         }
     }
-    //Method that calculates the levensthein disctance between two words
+    //Method that calculates the levensthein distance between two words
     static int LevenstheinDistance(string s1, string s2){
         int n = s1.Length;
         int m = s2.Length;
