@@ -1,6 +1,6 @@
 
 namespace MoogleEngine;
-//Create a heavy matrix of the documents
+//Heavy matrix of the documents
 //Document object that represent txt files
 
 public class Document{
