@@ -17,7 +17,6 @@ public class SearchResult
     public SearchResult() : this(new List<SearchItem>()) {
 
     }
-
     public string Suggestion { get; private set; }
 
     public IEnumerable<SearchItem> Items() {
