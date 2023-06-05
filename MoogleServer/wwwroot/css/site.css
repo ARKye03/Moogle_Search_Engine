@@ -4,6 +4,11 @@
     padding: 0;
     box-sizing: border-box;
 }
+:root{
+    --SearchingBoxPosition: relative;
+    --SearchingBoxTop: 15rem;
+    --SearchingBoxLeft: 0;
+}
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #fff;
@@ -12,24 +17,30 @@ html, body {
     /*background-image: url("../images/UnBlurredBG.jpg") blur(4px);*/
     /*background-color: #2e2e2e;*/
 }
+.Searching{
+    position: var(--SearchingBoxPosition);
+    top: var(--SearchingBoxTop);
+    right: var(--SearchingBoxLeft);
+    transition: 300ms;
+}
 .SearchBox{
     position: relative;
-    /*margin-top: 150px;*/
+    margin-top: 15px;
     width: 100%;
     max-width: 700px;
     background: #dfdfdf3b;
     color: #f5f5f5;
-    /*display: flex;*/
     border: 0;
-    border-radius: 60px;
+    border-radius: 10px;
     padding: 10px 20px;
 
 }
 ::placeholder{
     color: #ffffff93;
 }
+  
 .background-image {
-    background-image: linear-gradient(rgba(0, 4, 24, 0.952), rgba(24, 39, 124, 0.397)), url("../images/UnBlurredBG.jpg");
+    background-image: linear-gradient(rgba(0, 2, 14, 0.952), rgba(0, 5, 36, 0.397)), url("../images/UnBlurredBG.jpg");
     position: fixed;
     top: 0;
     left: 0;
@@ -39,10 +50,11 @@ html, body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    filter: blur(3px); /* Ajusta el valor de difuminado según tus preferencias */
+    filter: blur(2px); /* Ajusta el valor de difuminado según tus preferencias */
 }
 h1:focus {
     outline: none;
+    background-color: rebeccapurple;
 }
 
 a, .btn-link {
@@ -52,10 +64,12 @@ a, .btn-link {
 .btn-primary {
    /* position: fixed;
     margin-top: 153px;*/
+    position: relative;
+    /*top: 15rem;*/
     color: #ff0000;
     background-color: transparent;
     /*border-color: #44044d;*/
-    border-radius: 60px;
+    border-radius: 10px;
 }
 
 .content {

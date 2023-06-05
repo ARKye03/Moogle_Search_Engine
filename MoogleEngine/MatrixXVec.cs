@@ -1,8 +1,7 @@
-
 namespace MoogleEngine;
+
 //Heavy matrix of the documents
 //Document object that represent txt files
-
 public class Document
 {
     public Document(string id, Dictionary<string, double> tfidf)
@@ -13,10 +12,8 @@ public class Document
     public string id;
     public Dictionary<string, double> tfidf;
 }
-
 public class DocumentMatrix
 {
-
     public DocumentMatrix(List<Document> documents)
     {
         this.documents = documents;

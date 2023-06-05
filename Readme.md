@@ -1,6 +1,4 @@
-# -- *Bienvenido a MASE!* --
-
->--Moogle Advanced Search Engine--
+# -- *Bienvenido a Moogle!* --
 
 ![](moogle.png "Best Search Engine")
 
@@ -18,7 +16,6 @@
 
 - Soporta búsqueda de temas varios
 - Relativamente rápido, probado con 30 documentos(~40mb).
-<!--- Menos de 1gb de memoria RAM de uso(Con los 30 docs, probado en Arch Linux). -->
 - Capacidad de uso de operadores de Inclusión ('^'), Exclusión('!') y Cercanía('~').
 - Posibilidad de devolver sugerencias, una vez la consulta sea procesada y determinada incorrecta o inexistente en el Corpus.
 - Muestras de pequeñas secciones de los documentos donde se haya encontrado lo solicitado.
@@ -28,7 +25,20 @@
 
 ---
 
-1. Inicio
+0. Como comenzar:
+    - Si usted se encuentra en Linux, ejecutar en la carpeta del proyecto desde una terminal:
+
+        ```Shell
+        make dev
+        ```
+
+    - Si usted se encuentra en Windows, ejecutar en la carpeta del proyecto desde una terminal:
+
+        ```Shell
+        dotnet watch run --project MoogleServer
+        ```
+
+1. Inicio:
    - El programa inicia en `"Program.cs"`
 
     `Moogle.LetsGetStarted(@"..//Content");` Ln-5
@@ -37,7 +47,7 @@
     `public static void LetsGetStarted(string path){ corpus = new Corpus(path); }`
    - 1.1 Aqui se le da paso al motor de busqueda, que tratará de crear el Diccionario "GeneralFiler" que contendrá todas las palabras de los documentos 'MASE Corpus -> Ln4'
    - 1.2 Tambien se creará el diccionario casi más relevante del proyecto, "Docs", que almacenará cada documento con sus datos 'MASE Corpus -> Ln5'
-2. Corpus
+2. Corpus:
     - 2.1 Se ejecuta el constructor de esta clase:
         - 2.1.1 - `GetInfo()`, esta función extraerá los archivos de la carpeta content y los agregará al `GeneralFiler`(VocabularioGeneral)
         - 2.1.2 - `IDF()`, esta funcion calculará el IDF de las de los documentos, llamando la funcion `IDF` de la linea 72 de esa misma clase.
@@ -95,7 +105,7 @@
         - int MaxWordAppereance = 0; -> Frecuencia de la palabra que más aparece
         - Dictionary Vocabulary -> Este es el vocabulario del documento contra los indices de las palabras de ese vocabulario
 
-3. MASE Consulta(Seacher) y Puntaje(Score)
+3. MASE: Consulta(Seacher) y Puntaje(Score)
 
     - 3.1 El constructor de la clase, recibe la entrada del usuario(Query) desde el apartado grafico, y un Corpus(El ya creado anteriormente y creado al inicio del proyecto)
         - `UsrInp` es la consulta del usuario ya procesada, por el metodo ProcessQuery, que lo que hace no es más que separar en terminos la consulta
@@ -159,7 +169,7 @@
 
         - `FillSuggest()` Metodo que modifica la sugerencia a devolver.
 
-4. Score
+4. Score:
     - 4.1 Clase que guardará los puntajes de cada documento, para finalmente ser mostrado en el partado gráfico
         - `public Searcher searcher` Se declara una consulta
         - `public Corpus Corpus` Se declara un corpus
@@ -189,7 +199,7 @@
         - `TotalWeight()` Metodo que suma y devuelve los pesos de una palabra en cada aparicion de esta en cada documento. Se usa en la funcion `Compare()`.
         - `ValidateDoc()` Funcion que otorgará puntaje igual a 0 a aquellos documentos que contengan una palabra exluida y tambien otorgará 0 a cada documento que no contenga a una palabra incluida.
         - `Compare()` metodo presente en la clase Searcher, Ln -> 199, que se encargará de devolver entre dos palabras, la más importante usando el método `TotalWeight()`.
-5. Snippets
+5. Snippets:
 
     - 5.1 `FillSnippet()` es la función, que se encarga de llenar los snippets de aquellos documentos que pasaron el Score(!=0)
 
@@ -232,7 +242,7 @@
     }
     ```
 
-7. Retornando al inicio
+7. Retornando al inicio:
     - 7.1 La clase Moogle ahora:
         - Declara un `Corpus`, el mismo que da inicio al programa, y el cual se usará para la búsqueda.
         - Declara una `Consulta(searcher)`, la cual hará todos los pasos y metodos anteriormente explicados.

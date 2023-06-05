@@ -21,19 +21,17 @@ namespace MoogleEngine
         // Max word frqhzy
         public int MaxWordAppereance = 0;
         // Module del vector de WVal -> Valor |WVal|
-        public double Module = 0; //No se si esto que tambien lo puse en Data se puede optimizar no se me ocurre, pero da iwal
-                                  //Se me ocurrió esto, pero creo que no tendré tiempo, más adelante lo implemento xd
-                                  //Aqui iria la searcher del usuario, pero en dependencia de los operadores(OPCIONALES) iria a un lado u otro supongo, y ya luego en base a eso proceso la busqueda, pero si estas leyendo esto es que no me dio tiempo xd
+        public double Module = 0; 
+        // Listas que varian en dependencia de los operadores opcionales colocados en la consulta
         public List<string> LetMeIn;
         public List<string> LetMeOut;
         public List<(string, string)> Closeness;
 
-        //Hilo que guarda la Suggestion que no he hecho, pero mi abuela me dijo que siempre hay que pensar en el futuro
+        //Hilo que guarda la sugerencia
         public string? _suggestion;
 
         public Searcher(string Query, Corpus corpus)
         {
-            //this.UserInput = Query;
             UsrInp = ProcessQuery(Query);
             LetMeIn = new List<string>();
             LetMeOut = new List<string>();
@@ -70,7 +68,7 @@ namespace MoogleEngine
                 count++;
             }
         }
-        //Vector de pesos de la searcher
+        //Vector de pesos de la searcher/consulta
         public void Mod()
         {
             for (int i = 0; i < WVal.Length; i++)
@@ -79,7 +77,7 @@ namespace MoogleEngine
             }
             Module = Math.Sqrt(Module);
         }
-        //Me apodero de los datos de la searcher
+        //Me apodero de los datos de la searcher/consulta
         public void GetInfo(string[] UsrInp)
         {
             int count = 0;
@@ -108,7 +106,7 @@ namespace MoogleEngine
                     Closeness.Add((UsrInp[i - 1], UsrInp[i + 1]));
                     continue;
                 }
-                // hasta aqui el metodo lo q hace es añadir las palabras con operadores a sus listas correspondientes
+                // Hasta aquí el método lo que hace es añadir las palabras con operadores a sus listas correspondientes.
                 //-------------------------------------------------------------------------------------------------------\\
                 // Cada palabra de la searcher va para el diccionario Frqhzy(frqhzy) con su cantidad de repeticiones
 
@@ -150,17 +148,15 @@ namespace MoogleEngine
                 string txt = File.ReadAllText(tupla[i].Item1).ToLower();
                 string[] palabras = txt.Split(new char[] { ' ' });
                 if (Relevant == "") return;
-                // una vez determinado el termino mas importante, creo un snippet q lo contenga
+                // Una vez determinado el termino mas importante, se crea un snippet donde se encuentre
                 Snippets[i] = RetSnippet(txt, Relevant);
             }
         }
         public string RetSnippet(string txt, string Relevant)
         {
-            //Relevant = Regex.Replace(Relevant.Normalize(), @"[^a-zA-z0-9 ]+", "");
-            //Relevant=Regex.Replace(Relevant, @"[^a-zA-z0-9 ]+", "");
             while (true)
             {
-                // esta condicion es para seleccionar un snippet q contenga a la palabra mas importante de manera exacta
+                // Esta condicion es para seleccionar un snippet que contenga a la palabra mas importante
                 if ((!(Char.IsPunctuation(txt[txt.IndexOf(Relevant) - 1])) && !(txt[txt.IndexOf(Relevant) - 1] == ' ')) || (!(Char.IsPunctuation(txt[txt.IndexOf(Relevant) + Relevant.Length])) && !(txt[txt.IndexOf(Relevant) + Relevant.Length] == ' ')))
                 {
                     txt = txt.Substring(txt.IndexOf(Relevant) + Relevant.Length);
@@ -194,7 +190,7 @@ namespace MoogleEngine
                 }
             }
         }
-        // A tirar la casa por la ventana, no hay más, palabra a palabra para _suggestion lo mejor LOL
+        // A tirar la casa por la ventana, no hay más, palabra a palabra para sugerir lo mejor.
         private static string Suggestion(string word, Corpus corpus)
         {
             string suggestion = "";
@@ -261,7 +257,7 @@ namespace MoogleEngine
     //Esta clase almacenará los puntajes de cada documento, para luego ser mostrado
     public class Score
     {
-        // searcher
+        // Searcher
         public Searcher searcher;
         // Corpus
         public Corpus Corpus;
@@ -276,7 +272,7 @@ namespace MoogleEngine
             tupla = new (string, double)[corpus.Docs.Count];
             FillScores();
         }
-        // Puntaje\Valor resultante del producto del vector searcher y el vector de lso documentos
+        // Puntaje\Valor resultante del producto del vector searcher y el vector de los documentos
         // Tuplas de mayor a menor
         public void FillScores()
         {
@@ -306,7 +302,7 @@ namespace MoogleEngine
             suma = suma / (searcher.Module * Corpus.Docs.ElementAt(i).Value.Module);
             return suma;
         }
-        // metodo q organiza elementos de menor a mayor
+        // Metodo que organiza elementos de menor a mayor
         public static void BubbleSort((string, double)[] tupla)
         {
             for (int i = 0; i < tupla.Length; i++)
@@ -314,7 +310,7 @@ namespace MoogleEngine
                     if (tupla[j].Item2 > tupla[j + 1].Item2)
                         Swap(tupla, j, j + 1);
         }
-        // metodo q intercambia 2 elementos de lugar dentro de un array
+        // Intercambio de 2 elementos de un array, clásico Swap
         private static void Swap((string, double)[] tupla, int a, int b)
         {
             (string, double) tmp = tupla[a];
@@ -322,7 +318,7 @@ namespace MoogleEngine
             tupla[b] = tmp;
         }
 
-        // devuelve la suma de los pesos de una palabra en cada uno de los documentos
+        // Devuelve la suma de los pesos de una palabra en cada uno de los documentos
         public static double TotalWeight(string word, Corpus corpus)
         {
             double totalweight = 0;
@@ -344,7 +340,7 @@ namespace MoogleEngine
             return true;
         }
 
-        // si existe algun par de palabras en la lista de Closeness,  modifica el score de los documentos dependiendo de la cercania entre los terminos q pertenecen a dicha lista
+        // Si existe algun par de palabras en la lista de Closeness, modifica el score de los documentos dependiendo de la cercania entre los terminos que pertenecen a dicha lista
         public void ModScore(int i)
         {
             if (searcher.Closeness.Count == 0) return;
@@ -356,9 +352,9 @@ namespace MoogleEngine
                     return;
                 }
             }
-            // si alguna de las 2 palabras q poseen un operador de Closeness entre ellas no se encuentra en un determinado documento el score de este documento sera dividido entre el largo de este
+            // Si alguna de las 2 palabras que poseen un operador de Closeness entre ellas no se encuentra en un determinado documento el score de este documento sera dividido entre el largo de este
 
-            // si aparecen ambas, el score sera dividido por la menor distancia entre ellas
+            // Si aparecen ambas, el score sera dividido por la menor distancia entre ellas
             List<int> a = new List<int>();
             List<int> b = new List<int>();
             for (int j = 0; j < searcher.Closeness.Count; j++)
