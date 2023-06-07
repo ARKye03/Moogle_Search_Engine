@@ -21,8 +21,7 @@
 }
 </div>
 <h1></h1>
-<div class="background-image">
-</div>
+<div class="background-image"></div>
 <h6></h6>
 
 <ul class="results">
@@ -42,7 +41,7 @@
     private SearchResult result = new SearchResult();
     public static double Timing = Moogle.Time;
     private void RunQuery(){
-        EstablecerPropiedadDeEstilo();
+        Relocate();
         result = Moogle.Query(query);
     }
     //Animate Logo
@@ -56,9 +55,8 @@
     //ChangeLayout
     private string valor = "0px";
 
-    private void EstablecerPropiedadDeEstilo()
+    private void Relocate()
     {
-        JSRuntime.InvokeVoidAsync("eval", $"document.documentElement.style.setProperty('--SearchingBoxTop', '{valor}')");
         JSRuntime.InvokeVoidAsync("eval", $"document.documentElement.style.setProperty('--SearchingBoxTop', '{"0px"}'); document.documentElement.style.setProperty('--SearchingBoxLeft', '{"32rem"}')");
     }
 }
