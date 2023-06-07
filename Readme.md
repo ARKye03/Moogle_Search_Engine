@@ -1,6 +1,6 @@
 # -- *Bienvenido a Moogle!* --
 
-![](moogle.png "Best Search Engine")
+!["Yo habia ponido mi foto aqui :("](moogle.png "Best Search Engine")
 
 > 1er Proyecto de Programación
 >
