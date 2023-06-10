@@ -50,6 +50,21 @@ public class DocumentMatrix
         }
         return new DocumentMatrix(documents);
     }
+    //Use matrix multiplication, to multiply two Document Matrix
+    public static DocumentMatrix MultiplyMatrix(DocumentMatrix matrix1, DocumentMatrix matrix2)
+    {
+        List<Document> documents = new List<Document>();
+        foreach (KeyValuePair<string, Dictionary<string, double>> document in matrix1.matrix)
+        {
+            Dictionary<string, double> tfidf = new Dictionary<string, double>();
+            foreach (KeyValuePair<string, double> term in document.Value)
+            {
+                tfidf.Add(term.Key, term.Value * matrix2.matrix[term.Key][document.Key]);
+            }
+            documents.Add(new Document(document.Key, tfidf));
+        }
+        return new DocumentMatrix(documents);
+    }
 }
 
 
