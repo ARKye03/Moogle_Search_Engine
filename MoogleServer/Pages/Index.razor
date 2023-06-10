@@ -53,8 +53,6 @@
         imageStyle = isHovered ? "transform: scale(1.2); transition: transform 0.3s ease;" : "transform: scale(1); transition: transform 0.3s ease;";
     }
     //ChangeLayout
-    private string valor = "0px";
-
     private void Relocate()
     {
         JSRuntime.InvokeVoidAsync("eval", $"document.documentElement.style.setProperty('--SearchingBoxTop', '{"0px"}'); document.documentElement.style.setProperty('--SearchingBoxLeft', '{"32rem"}')");
