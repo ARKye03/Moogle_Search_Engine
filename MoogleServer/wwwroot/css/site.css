@@ -7,13 +7,17 @@
 :root{
     --SearchingBoxPosition: relative;
     --SearchingBoxTop: 15rem;
-    --SearchingBoxLeft: 0;
+    --SearchingBoxLeft: 20px;
 }
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #fff;
     min-height: 100vh;
     height: 100%;
+}
+.SearchBar{
+    position: relative;
+    left: 40px;
 }
 .Searching{
     position: var(--SearchingBoxPosition);
@@ -22,11 +26,12 @@ html, body {
     transition: 300ms;
 }
 .SearchBox{
+    transform: scale(1.1,1.2);
     position: relative;
     margin-top: 15px;
     width: 100%;
     max-width: 700px;
-    background: #dfdfdf3b;
+    background: #242731;
     color: #f5f5f5;
     border: 0;
     border-radius: 10px;
@@ -35,14 +40,15 @@ html, body {
 
 }
 .SearchBox:hover{
-    background: #dfdfdf6e;
+    background: #3b3f4d;
 }
 ::placeholder{
     color: #ffffff93;
 }
   
 .background-image {
-    background-image: linear-gradient(rgba(0, 2, 14, 0.952), rgba(0, 5, 36, 0.397)), url("../images/UnBlurredBG.jpg");
+    /*background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.2)), url("../images/UnBlurredBG.jpg");*/
+    background-color: #1e2028;
     position: fixed;
     top: 0;
     left: 0;
@@ -53,6 +59,19 @@ html, body {
     background-repeat: no-repeat;
     background-size: cover;
     filter: blur(2px); /* Ajusta el valor de difuminado según tus preferencias */
+}
+.SearchButton{
+    position: relative;
+    right: 2.1rem;
+    transform: scale(0.6);
+    background-color: rgba(255, 255, 255, 0);
+    border: 0;
+    border-radius: 10px;
+    transition: 200ms;
+}
+.SearchButton:hover{
+    transform: scale(0.8);
+    transition: 100ms;
 }
 h1:focus {
     outline: none;

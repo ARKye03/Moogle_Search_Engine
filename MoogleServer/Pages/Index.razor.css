@@ -1,13 +1,23 @@
 
 .results {
     text-align: left;
-    color: #fff;
+    color: #ffffff;
 }
 
 .fade-in-animation {
+    margin: 10px;
+    padding: 10px;
+    width: 850px;
+    background-color: #00010327;
+    border: 1;
+    border-radius: 10px;
     opacity: 0;
     animation: fade-in 0.5s ease-in-out forwards;
   }
+.fade-in-animation:hover{
+  transition: 320ms;
+  background-color: rgba(0, 2, 20, 0.651);
+}
   
   @keyframes fade-in {
     from {

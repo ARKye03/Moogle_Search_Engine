@@ -10,9 +10,11 @@
 <div class="Searching"> 
     <img src="images/MoogleLogo.png" alt="Beautiful_Moogle_Logo" width="500" height="150" @onmouseover="(() => AnimateImage(true))" @onmouseout="(() => AnimateImage(false))" style="@imageStyle"/>
     <h1></h1>
+    <div class="SearchBar">
     <input class="SearchBox" @bind="query" @onkeyup="RunQuery" placeholder="Let's search with Moogle!">
-    <button type="default" class="btn btn-primary" @onclick="RunQuery">🔍</button>
-
+    <!-- <button type="default" class="btn btn-primary" @onclick="RunQuery">🔍</button> -->
+    <button type="default" class="SearchButton" @onclick="RunQuery"> <img src="images/Magnifying Glass.png" alt="Glassy"></button>
+    </div>
     @if (!string.IsNullOrEmpty(result.Suggestion)) {
     <div class="suggestion">
         <p>Did you mean <strong><a href="#">@result.Suggestion</a></strong>?</p>
@@ -50,11 +52,11 @@
 
     void AnimateImage(bool hovered){
         isHovered = hovered;
-        imageStyle = isHovered ? "transform: scale(1.2); transition: transform 0.3s ease;" : "transform: scale(1); transition: transform 0.3s ease;";
+        imageStyle = isHovered ? "transform: scale(1.1); transition: transform 0.3s ease;" : "transform: scale(1); transition: transform 0.3s ease;";
     }
     //ChangeLayout
     private void Relocate()
     {
-        JSRuntime.InvokeVoidAsync("eval", $"document.documentElement.style.setProperty('--SearchingBoxTop', '{"0px"}'); document.documentElement.style.setProperty('--SearchingBoxLeft', '{"32rem"}')");
+        JSRuntime.InvokeVoidAsync("eval", $"document.documentElement.style.setProperty('--SearchingBoxTop', '{"0px"}'); document.documentElement.style.setProperty('--SearchingBoxLeft', '{"29rem"}')");
     }
 }
