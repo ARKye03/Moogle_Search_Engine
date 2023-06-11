@@ -14,7 +14,8 @@
 
 ## Features
 
-- Soporta búsqueda de temas varios
+- Soporta búsqueda de temas varios.
+- Modo Oscuro y Modo Claro.
 - Relativamente rápido, probado con 30 documentos(~40mb).
 - Capacidad de uso de operadores de Inclusión ('^'), Exclusión('!') y Cercanía('~').
 - Posibilidad de devolver sugerencias, una vez la consulta sea procesada y determinada incorrecta o inexistente en el Corpus.
@@ -39,6 +40,8 @@
         ```
 
 1. Inicio:
+
+   - En la parte superior derecha elegir modo.(Oscuro, OscuroSólido, ClaroSólido)
    - El programa inicia en `"Program.cs"`
 
     `Moogle.LetsGetStarted(@"..//Content");` Ln-5

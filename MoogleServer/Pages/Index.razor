@@ -7,9 +7,14 @@
 
 <PageTitle>Moogle!</PageTitle>
 
+<button type="default" class="BG" @onclick="ChangeBG"> <img src="images/config.png" alt="Change Background"> </button>
+
 <div class="Searching"> 
-    <img src="images/MoogleLogo.png" alt="Beautiful_Moogle_Logo" width="500" height="150" @onmouseover="(() => AnimateImage(true))" @onmouseout="(() => AnimateImage(false))" style="@imageStyle"/>
+
+    <img class="MoogLogo" src="images/MoogleLogo.png" alt="Beautiful_Moogle_Logo" width="500" height="150" @onmouseover="(() => AnimateImage(true))" @onmouseout="(() => AnimateImage(false))" style="@imageStyle"/>
+    
     <h1></h1>
+    
     <div class="SearchBar">
     <input class="SearchBox" @bind="query" @onkeyup="RunQuery" placeholder="Let's search with Moogle!">
     <!-- <button type="default" class="btn btn-primary" @onclick="RunQuery">🔍</button> -->
@@ -49,6 +54,7 @@
     //Animate Logo
     bool isHovered = false;
     string imageStyle = "";
+    string BackG = "DarkWP";
 
     void AnimateImage(bool hovered){
         isHovered = hovered;
@@ -58,5 +64,24 @@
     private void Relocate()
     {
         JSRuntime.InvokeVoidAsync("eval", $"document.documentElement.style.setProperty('--SearchingBoxTop', '{"0px"}'); document.documentElement.style.setProperty('--SearchingBoxLeft', '{"29rem"}')");
+    }
+    //ChangeBG
+    private void ChangeBG()
+    {
+        if (BackG == "DarkWP")
+        {
+            JSRuntime.InvokeVoidAsync("eval", $"document.documentElement.style.setProperty('--Background', '{"#1e2028"}')");
+            BackG = "Solid";
+        }
+        else if (BackG == "Solid")
+        {  
+            JSRuntime.InvokeVoidAsync("eval", $"document.documentElement.style.setProperty('--Background', '{"#fff"}'); document.documentElement.style.setProperty('--Letteras', '{"#000000"}'); document.documentElement.style.setProperty('--SearchBoxBackGround', '{"#5c5c5f"}'); document.documentElement.style.setProperty('--SearchBoxBorder', '{"2"}'); document.documentElement.style.setProperty('--SearchBoxBorderColor', '{"#000"}'); document.documentElement.style.setProperty('--MoogBackGColor', '{"#3b3f4d80"}')");
+            BackG = "Light";  
+        }
+        else if (BackG == "Light")
+        {  
+            JSRuntime.InvokeVoidAsync("eval", $"document.documentElement.style.setProperty('--Background', '{"var(--WallpaperGround)"}'); document.documentElement.style.setProperty('--Letteras', '{"#fff"}'); document.documentElement.style.setProperty('--SearchBoxBackGround', '{"#242731"}'); document.documentElement.style.setProperty('--SearchBoxBorder', '{"0"}'); document.documentElement.style.setProperty('--SearchBoxBorderColor', '{"0"}'); document.documentElement.style.setProperty('--MoogBackGColor', '{"#3b3f4d00"}')");
+            BackG = "DarkWP";  
+        }  
     }
 }

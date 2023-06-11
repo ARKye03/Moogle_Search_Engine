@@ -8,12 +8,24 @@
     --SearchingBoxPosition: relative;
     --SearchingBoxTop: 15rem;
     --SearchingBoxLeft: 20px;
+    --Letteras: #fff;
+    --Background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.2)), url("../images/UnBlurredBG.jpg");
+    --WallpaperGround: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.2)), url("../images/UnBlurredBG.jpg");
+    --SearchBoxBackGround: #242731;
+    --SearchBoxBorder: 0;
+    --SearchBoxBorderColor: 0;
+    --MoogBackGColor: #3b3f4d00;
 }
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #fff;
+    color: var(--Letteras);
     min-height: 100vh;
     height: 100%;
+}
+.MoogLogo{
+    border-radius: 30px;
+    transition: 100ms;
+    background-color: var(--MoogBackGColor);
 }
 .SearchBar{
     position: relative;
@@ -31,12 +43,14 @@ html, body {
     margin-top: 15px;
     width: 100%;
     max-width: 700px;
-    background: #242731;
-    color: #f5f5f5;
-    border: 0;
+    background: var(--SearchBoxBackGround);
+    color: var(--Letteras);
+    border: var(--SearchBoxBorder);
+    border-color: var(--SearchBoxBorderColor);
     border-radius: 10px;
     padding: 10px 20px;
     transition: 100ms;
+    accent-color: #002fff62;
 
 }
 .SearchBox:hover{
@@ -45,10 +59,11 @@ html, body {
 ::placeholder{
     color: #ffffff93;
 }
-  
 .background-image {
+    transition: 200ms;
     /*background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.2)), url("../images/UnBlurredBG.jpg");*/
-    background-color: #1e2028;
+    /*background-color: #1e2028;*/
+    background: var(--Background);
     position: fixed;
     top: 0;
     left: 0;
@@ -58,6 +73,7 @@ html, body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    transition: 200ms;
     filter: blur(2px); /* Ajusta el valor de difuminado según tus preferencias */
 }
 .SearchButton{
@@ -72,6 +88,22 @@ html, body {
 .SearchButton:hover{
     transform: scale(0.8);
     transition: 100ms;
+}
+.BG{
+    background-color: transparent;
+    border: 0;
+    border-radius: 60px;
+    padding: 10px;
+    transform: scale(0.7);
+    position: fixed;
+    top: 20px;
+    right: 25px;
+    transition: 100ms;
+}
+.BG:hover{
+    transition: 200ms;
+    background-color: #3b3f4d91;
+    rotate: 90deg;
 }
 h1:focus {
     outline: none;

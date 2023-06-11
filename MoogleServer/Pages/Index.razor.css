@@ -1,7 +1,7 @@
 
 .results {
     text-align: left;
-    color: #ffffff;
+    color: var(--Letteras);
 }
 
 .fade-in-animation {
