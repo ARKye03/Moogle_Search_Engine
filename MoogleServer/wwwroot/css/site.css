@@ -38,6 +38,7 @@ html, body {
     transition: 300ms;
 }
 .SearchBox{
+    font-size: 17px;
     transform: scale(1.1,1.2);
     position: relative;
     margin-top: 15px;
@@ -57,6 +58,7 @@ html, body {
     background: #3b3f4d;
 }
 ::placeholder{
+    font-size: 18px;
     color: #ffffff93;
 }
 .background-image {

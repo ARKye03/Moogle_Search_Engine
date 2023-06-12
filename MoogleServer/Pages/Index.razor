@@ -23,7 +23,7 @@
     @if (!string.IsNullOrEmpty(result.Suggestion)) {
     <div class="suggestion">
         <p>Did you mean <strong><a href="#">@result.Suggestion</a></strong>?</p>
-       <!-- <p>Tomó @Timing segundos</p> -->
+        <!-- <p>Tomó @Timing segundos</p> -->
     </div>
 }
 </div>
@@ -46,7 +46,6 @@
 @code {
     private string query = "";
     private SearchResult result = new SearchResult();
-    public static double Timing = Moogle.Time;
     private void RunQuery(){
         Relocate();
         result = Moogle.Query(query);
