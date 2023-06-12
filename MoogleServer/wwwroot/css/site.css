@@ -60,7 +60,6 @@ html, body {
     color: #ffffff93;
 }
 .background-image {
-    transition: 200ms;
     /*background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.2)), url("../images/UnBlurredBG.jpg");*/
     /*background-color: #1e2028;*/
     background: var(--Background);
@@ -74,7 +73,7 @@ html, body {
     background-repeat: no-repeat;
     background-size: cover;
     transition: 200ms;
-    filter: blur(2px); /* Ajusta el valor de difuminado según tus preferencias */
+    filter: blur(2px);
 }
 .SearchButton{
     position: relative;
