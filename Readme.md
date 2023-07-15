@@ -12,6 +12,9 @@
 >
 > Estudiante: Rafael A. Sánchez Martínez
 
+Original work here:
+https://github.com/ARKye03/MASE-Release.git
+
 ## Features
 
 - Soporta búsqueda de temas varios.
