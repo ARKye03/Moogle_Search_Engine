@@ -1,6 +1,6 @@
 # -- *Welcome to Moogle!* --
 
->With LaTex info...
+>With LaTex info...and DotNet 7
 
 !["My pic was here, I swear :("](moogle.png "Best Search Engine")
 
