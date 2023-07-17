@@ -29,6 +29,8 @@ Original work
 
 ## How to
 
+Open a terminal and execute:
+
 ```shell
 git clone https://github.com/ARKye03/Moogle-Reimagined.git
 ```
@@ -44,5 +46,7 @@ Then with bash or zsh execute:
 ```shell
 ./start_searching.sh
 ```
+
+Btw it won't work with only one archive in the "Content" folder
 
 ### Project Info inside

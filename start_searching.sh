@@ -5,8 +5,15 @@ if [ -n "$ZSH_VERSION" ]; then
     exec zsh "$0" "$@"
 fi
 
+#Vars
 folder_path="Content/"
 
+#Check -h flag
+if [[ "$1" == "-h" && ! -z "$2" ]]; then
+    echo "I've always liked flags, there was supposed to be a flag -m here to change the browser mode, but after a devastating bug I decided to remove it... Pray for Moogle!"
+    read -n 1 -s -r -p "Press any key to continue..."
+    exit 0
+fi
 file_count=$(find "$folder_path" -type f | wc -l)
 
 if [[ $file_count -gt 1 ]]; then
@@ -19,5 +26,5 @@ if [[ $file_count -gt 1 ]]; then
   fi
 else
   echo "La carpeta 'Content' contiene al parecer un solo archivo, coloque más archivos en la carpeta, y ejecute nuevamente el script"
-  sleep 5
+  read -n 1 -s -r -p "Press any key to continue..."
 fi
