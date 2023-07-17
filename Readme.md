@@ -31,19 +31,19 @@ Original work
 
 Open a terminal and execute:
 
-```sh
+```shell
 git clone https://github.com/ARKye03/Moogle-Reimagined.git
 ```
 
 Clone this repository then `'cd' to /Moogle-Reimagined` in a terminal:
 
-```sh
+```shell
 chmod +x start_searching.sh
 ```
 
 Then with bash or zsh execute:
 
-```sh
+```shell
 ./start_searching.sh
 ```
 
