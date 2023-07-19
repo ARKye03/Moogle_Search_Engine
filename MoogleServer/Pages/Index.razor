@@ -17,13 +17,12 @@
     
     <div class="SearchBar">
     <input class="SearchBox" @bind="query" @onkeyup="RunQuery" placeholder="Let's search with Moogle!">
-    <!-- <button type="default" class="btn btn-primary" @onclick="RunQuery">🔍</button> -->
     <button type="default" class="SearchButton" @onclick="RunQuery"> <img src="images/Magnifying Glass.png" alt="Glassy"></button>
     </div>
     @if (!string.IsNullOrEmpty(result.Suggestion)) {
     <div class="suggestion">
         <p>Did you mean <strong><a href="#">@result.Suggestion</a></strong>?</p>
-        <!-- <p>Tomó @Timing segundos</p> -->
+        <p>Se encontraron @item_q resultado(s) en un total de @time ms</p>
     </div>
 }
 </div>
@@ -46,9 +45,15 @@
 @code {
     private string query = "";
     private SearchResult result = new SearchResult();
+    private float time;
+    private int item_q;
     private void RunQuery(){
+        Moogle.Timer.Start();
         Relocate();
         result = Moogle.Query(query);
+        time = Moogle.Timer.ElapsedMilliseconds;
+        Moogle.Timer.Reset();
+        item_q = Moogle.item_q;
     }
     //Animate Logo
     bool isHovered = false;

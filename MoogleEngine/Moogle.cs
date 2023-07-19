@@ -8,6 +8,7 @@ public static class Moogle
     public static Searcher? searcher;
     public static Score? score;
     public static Stopwatch Timer = new Stopwatch();
+    public static int item_q;
     public static void LetsGetStarted(string path) { corpus = new Corpus(path); } //Start
     public static SearchResult Query(string query)
     {
@@ -21,7 +22,9 @@ public static class Moogle
         {
             items.Add(new SearchItem(score.tupla[i].Item1.Substring(12), searcher.Snippets[i], score.tupla[i].Item2));
         }
-
+        
+        item_q = items.Count;
+        Timer.Stop();
         return new SearchResult(items, searcher._suggestion!);
     }
 }
