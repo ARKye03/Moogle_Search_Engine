@@ -41,10 +41,10 @@ Clone this repository then `'cd' to /Moogle-Reimagined` in a terminal:
 chmod +x start_searching.sh
 ```
 
-Then with bash or zsh execute:
+Then with bash or zsh execute to display info:
 
 ```shell
-./start_searching.sh
+./start_searching.sh --help
 ```
 
 Btw it won't work with only one archive in the "Content" folder
