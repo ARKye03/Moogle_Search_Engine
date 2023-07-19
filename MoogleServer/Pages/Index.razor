@@ -16,7 +16,7 @@
     <h1></h1>
     
     <div class="SearchBar">
-    <input class="SearchBox" @bind="query" @onkeyup="RunQuery" placeholder="Let's search with Moogle!">
+    <input class="SearchBox" @bind="query" @onkeyup="HandleKeyUp" placeholder="Let's search with Moogle!">
     <button type="default" class="SearchButton" @onclick="RunQuery"> <img src="images/Magnifying Glass.png" alt="Glassy"></button>
     </div>
     @if (!string.IsNullOrEmpty(result.Suggestion)) {
@@ -47,6 +47,12 @@
     private SearchResult result = new SearchResult();
     private float time;
     private int item_q;
+    private void HandleKeyUp(KeyboardEventArgs e)
+    {
+        if(e.Key == "Enter" || e.Key == "enter"){
+            RunQuery();
+        }
+    }
     private void RunQuery(){
         Moogle.Timer.Start();
         Relocate();
