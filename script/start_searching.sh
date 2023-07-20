@@ -92,16 +92,38 @@ show_slides() {
 }
 # Función para limpiar los ficheros auxiliares
 clean() {
-  cd Informe/
-  echo "Limpiando los ficheros auxiliares..."
-  rm *.aux
-  rm *.log
-  rm *.fdb_latexmk
-  rm *.fls
-  rm *.synctex.gz
+  echo "Limpiando elementos del informe..."
+  echo "Limpiando archivos .aux..."
+  rm Informe/*.aux
+  echo "Limpiando archivos .log..."
+  rm Informe/*.log
+  echo "Limpiando archivos .fdb_latexmk..."
+  rm Informe/*.fdb_latexmk
+  echo "Limpiando archivos .fls..."
+  rm Informe/*.fls
+  echo "Limpiando archivos .synctex.gz..."
+  rm Informe/*.synctex.gz
+
+  echo "Limpiando elementos de la presentación..."
+  echo "Limpiando archivos .aux..."
+  rm Presentacion/*.aux
+  echo "Limpiando archivos .log..."
+  rm Presentacion/*.log
+  echo "Limpiando archivos .fdb_latexmk..."
+  rm Presentacion/*.fdb_latexmk
+  echo "Limpiando archivos .fls..."
+  rm Presentacion/*.fls
+  echo "Limpiando archivos .synctex.gz..."
+  rm Presentacion/*.synctex.gz
+
   echo "Eliminando los ficheros objeto :|"
-  rm -r MoogleEngine/obj/Debug/
-  rm -r MoogleServer/obj/Debug/
+  rm -r MoogleEngine/obj/
+  rm -r MoogleEngine/bin/
+  rm -r MoogleServer/obj/
+  rm -r MoogleServer/bin/
+  
+  echo "Limpieza completada"
+  read -n 1 -s -r -p "Press any key to continue..."
 }
 help(){
   echo "Estas son tus opciones, pasalas como argumentos al script:"
