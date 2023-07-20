@@ -121,7 +121,9 @@ clean() {
   rm -r MoogleEngine/bin/
   rm -r MoogleServer/obj/
   rm -r MoogleServer/bin/
-  
+
+  sleep 1
+  clear
   echo "Limpieza completada"
   read -n 1 -s -r -p "Press any key to continue..."
 }
@@ -139,7 +141,7 @@ help(){
 
 # Verificar los argumentos pasados al script
 if [ $# -eq 0 ]; then
-  echo "Debe proporcionar al menos una opción: run, clean, report, slides, show_report, show_slides"
+  echo "Debe proporcionar al menos una opción, escribe './start_searching.sh --help' para mas opciones"
   read -n 1 -s -r -p "Press any key to continue..."
   exit 1
 fi
