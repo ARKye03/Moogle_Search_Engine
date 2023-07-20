@@ -1,8 +1,14 @@
 
 .results {
-    text-align: left;
-    color: var(--Letteras);
-    font-size: 18px;
+  overflow-y: scroll;
+  margin-top: 165px;
+  height: 40rem;
+  text-align: left;
+  color: var(--Letteras);
+  font-size: 18px;
+}
+.suggestion{
+  margin: 0;
 }
 
 .fade-in-animation {

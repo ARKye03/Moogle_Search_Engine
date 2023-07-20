@@ -15,6 +15,8 @@
     
     <h1></h1>
     
+    <img class="MiniMoogLogo" src="images/Logazs.png" alt="Beautiful_Moogle_Logo"/>
+    
     <div class="SearchBar">
     <input class="SearchBox" @bind="query" @onkeyup="HandleKeyUp" placeholder="Let's search with Moogle!">
     <button type="default" class="SearchButton" @onclick="RunQuery"> <img src="images/Magnifying Glass.png" alt="Glassy"></button>
@@ -29,12 +31,11 @@
 <h1></h1>
 <div class="background-image"></div>
 <h6></h6>
-
 <ul class="results">
 @foreach (var item in result.Items()) {
     <li>
         <div class="fade-in-animation">
-            <p class="title" >@item.Title</p>
+            <p class="title" ><u>@item.Title</u></p>
             <p>-->  @item.Snippet ..</p>
             <p>-->  @item.Score ...</p>
         </div>
@@ -73,7 +74,9 @@
     //ChangeLayout
     private void Relocate()
     {
-        JSRuntime.InvokeVoidAsync("eval", $"document.documentElement.style.setProperty('--SearchingBoxTop', '{"0px"}'); document.documentElement.style.setProperty('--SearchingBoxLeft', '{"29rem"}')");
+        JSRuntime.InvokeVoidAsync("eval", $"document.documentElement.style.setProperty('--SearchingBoxTop', '{"-7rem"}'); document.documentElement.style.setProperty('--SearchingBoxLeft', '{"10rem"}'), document.documentElement.style.setProperty('--SearchingBoxPosition', '{"fixed"}')");
+        JSRuntime.InvokeVoidAsync("eval", $"document.documentElement.style.setProperty('--mooglelogo_opacity', '{"0"}'); document.documentElement.style.setProperty('--mini_mooglelogo_opacity', '{"100%"}')");
+
     }
     //ChangeBG
     private void ChangeBG()
