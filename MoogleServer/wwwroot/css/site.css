@@ -39,6 +39,8 @@ html, body {
     opacity: var(--mini_mooglelogo_opacity);
     border-radius: 25px;
     transition: 400ms;
+}.MiniMoogLogo:hover{
+    transform: scale(1.1);
 }
 .SearchBar{
     position: relative;
