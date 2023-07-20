@@ -4,13 +4,10 @@
 if [ -n "$ZSH_VERSION" ]; then
     exec zsh "$0" "$@"
 fi
-
 #Vars
 folder_path="../Content"
 file_count=$(find "$folder_path" -type f | wc -l)
-
 cd ..
-
 # Run Moogle
 run() {
 if [[ $file_count -gt 1 ]]; then
@@ -25,33 +22,31 @@ else
   echo "La carpeta 'Content' contiene al parecer un solo archivo, coloque más archivos en la carpeta, y ejecute nuevamente el script"
 fi
 }
-
 # Función para compilar y generar el PDF del informe
 report() {
   echo "Compilando y generando el PDF del informe..."
-  
-  pdflatex Informe/Informe.tex
+  cd Informe/
+  pdflatex Informe.tex
   if [ $? -eq 0 ]; then
     echo "pdflatex succesfull"
     read -n 1 -s -r -p "Press any key to continue..."
   else
     echo "pdflatex falló, probando latexmk"
-    latexmk -c Informe/Informe.tex
+    latexmk -c Informe.tex
     read -n 1 -s -r -p "Press any key to continue..."
   fi
 }
-
 # Función para compilar y generar el PDF de presentación
 slides() {
   echo "Compilando y generando PDF de la presentación..."
-    
-  pdflatex Presentacion/Presentacion.tex
+  cd Presentacion/  
+  pdflatex Presentacion.tex
   if [ $? -eq 0 ]; then
     echo "pdflatex succesfull"
     read -n 1 -s -r -p "Press any key to continue..."
   else
     echo "pdflatex falló, probando latexmk"
-    latexmk -c Presentacion/Presentacion.tex
+    latexmk -c Presentacion.tex
     read -n 1 -s -r -p "Press any key to continue..."
   fi
 }
@@ -60,21 +55,21 @@ show_report() {
   if [ ! -f "Informe/Informe.pdf" ]; then
       report
   fi
+  cd Informe/
 
   if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     echo "Linux Detected"
-    xdg-open Informe/Informe.pdf 
+    xdg-open Informe.pdf 
   elif [[ "$OSTYPE" == "darwin"* ]]; then
     echo "macOS Detected"
-    open Informe/Informe.pdf 
+    open Informe.pdf 
   elif [[ "$OSTYPE" == "msys"* ]]; then
     echo "Windows Detected"
-    start Informe/Informe.pdf 
+    start Informe.pdf 
   else
     echo "No se pudo determinar el sistema operativo"
   fi
 }
-
 # Función para visualizar presentación
 show_slides() {
   if [ ! -f "Presentacion/Presentacion.pdf" ]; then
@@ -83,21 +78,21 @@ show_slides() {
 
   if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     echo "Linux Detected"
-    xdg-open Presentacion/Presentacion.pdf 
+    xdg-open Presentacion.pdf 
   elif [[ "$OSTYPE" == "darwin"* ]]; then
     echo "macOS Detected"
-    open Presentacion/Presentacion.pdf 
+    open Presentacion.pdf 
   elif [[ "$OSTYPE" == "msys"* ]]; then
     echo "Windows Detected"
-    start Presentacion/Presentacion.pdf 
+    start Presentacion.pdf 
   else
     echo "No se pudo determinar el sistema operativo :("
     read -n 1 -s -r -p "Press any key to continue..."
   fi
 }
-
 # Función para limpiar los ficheros auxiliares
 clean() {
+  cd Informe/
   echo "Limpiando los ficheros auxiliares..."
   rm *.aux
   rm *.log
@@ -152,7 +147,7 @@ for option in "$@"; do
             show_slides
             ;;
         *)
-            echo "Opción inválida: $option"
+            echo "$option es invalido, escribe --help para mas opciones"
             exit 1
             ;;
     esac

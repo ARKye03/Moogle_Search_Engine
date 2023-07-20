@@ -35,7 +35,7 @@ Open a terminal and execute:
 git clone https://github.com/ARKye03/Moogle-Reimagined.git
 ```
 
-Clone this repository then `'cd' to /Moogle-Reimagined` in a terminal:
+Clone this repository then `'cd' to /Moogle-Reimagined/script` in a terminal:
 
 ```shell
 chmod +x start_searching.sh
