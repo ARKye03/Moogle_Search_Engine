@@ -137,7 +137,63 @@ help(){
   echo "--show_report: |-sr  |  Visualizar el informe"
   echo "--show_slides: |-ss  |  Visualizar la presentación"
   echo "--clean:       |-c   |  Eliminar todos los ficheros auxiliares. Do it at my own risk :)"
+  #echo "--interactive  |-i   |  Interactuar con el script"
 }
+
+#interactive(){
+#  option=""
+#while [[ $option != "salir" ]]; do
+#    # Mostrar las opciones disponibles
+#    echo "1 - help:         |  Ayuda"
+#    echo "2 - run:          |  Ejectutar el proyecto"
+#    echo "3 - report:       |  Compilar y generar el pdf del proyecto latex relativo al informe"
+#    echo "4 - slide:        |  Compilar y generar el pdf del proyecto latex relativo a la presentación"
+#    echo "5 - show_report:  |  Visualizar el informe"
+#    echo "6 - show_slide:   |  Visualizar la presentación"
+#    echo "7 - clean:        |  Eliminar todos los ficheros auxiliares. Do it at my own risk :)"
+#    echo "8 - Salir:"
+#    echo "c - Clear"
+#    # Leer la opción seleccionada por el usuario
+#    read -n 1 -s -r -p "Selecciona una opción: " option
+#
+#    # Ejecutar la acción correspondiente a la opción seleccionada
+#    case $option in
+#        1)
+#            echo "-_-"
+#            ;;
+#        2)
+#            run
+#            ;;
+#        3)
+#            report
+#            ;;
+#        4)
+#            slides
+#            ;;       
+#        5)
+#            show_report
+#            ;;       
+#        6)
+#            show_slides
+#            ;;       
+#        7)
+#            clean
+#            ;;
+#        8)
+#            echo "Saliendo..."
+#            ;; 
+#        c)
+#            clear
+#            ;;         
+#        *)
+#            echo "Opción inválida"
+#            ;;
+#    esac
+#
+#    cd script/
+#    echo # BlankedSpaces
+#done
+#}
 
 # Verificar los argumentos pasados al script
 if [ $# -eq 0 ]; then
@@ -170,6 +226,9 @@ for option in "$@"; do
         --show_slides | -ss)
             show_slides
             ;;
+#        --interactive | -i)
+#            interactive
+#            ;;
         *)
             echo "$option es invalido, escribe --help para mas opciones"
             exit 1
