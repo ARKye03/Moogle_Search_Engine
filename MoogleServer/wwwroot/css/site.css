@@ -7,7 +7,7 @@
 :root{
     --SearchingBoxPosition: relative;
     --SearchingBoxTop: 15rem;
-    --SearchingBoxLeft: 32.7rem;
+    --SearchingBoxLeft: 20px;
     --Letteras: #fff;
     --Background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.2)), url("../images/UnBlurredBG.jpg");
     --WallpaperGround: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.2)), url("../images/UnBlurredBG.jpg");
@@ -15,8 +15,6 @@
     --SearchBoxBorder: 0;
     --SearchBoxBorderColor: 0;
     --MoogBackGColor: #3b3f4d00;
-    --mooglelogo_opacity: 100%;
-    --mini_mooglelogo_opacity: 0;
 }
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -25,41 +23,25 @@ html, body {
     height: 100%;
 }
 .MoogLogo{
-    opacity: var(--mooglelogo_opacity);
     border-radius: 30px;
     transition: 100ms;
     background-color: var(--MoogBackGColor);
-}
-.MiniMoogLogo{
-    position: fixed;
-    left: 1.5rem;
-    top: 0.6rem;
-    width: 120px;
-    height: 120px;
-    opacity: var(--mini_mooglelogo_opacity);
-    border-radius: 25px;
-    transition: 400ms;
-}.MiniMoogLogo:hover{
-    transform: scale(1.1);
 }
 .SearchBar{
     position: relative;
     left: 40px;
 }
 .Searching{
-    align-items: center;
-    justify-content: center;
-    width: 48rem;
     position: var(--SearchingBoxPosition);
     top: var(--SearchingBoxTop);
-    left: var(--SearchingBoxLeft);
+    right: var(--SearchingBoxLeft);
     transition: 300ms;
 }
 .SearchBox{
     font-size: 17px;
     transform: scale(1.1,1.2);
     position: relative;
-    margin-top: 5px;
+    margin-top: 15px;
     width: 100%;
     max-width: 700px;
     background: var(--SearchBoxBackGround);
