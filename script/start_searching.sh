@@ -22,6 +22,15 @@ else
   echo "La carpeta 'Content' contiene al parecer un solo archivo, coloque más archivos en la carpeta, y ejecute nuevamente el script"
 fi
 }
+build() {
+if [[ $OSTYPE == "linux-gnu" || $OSTYPE == "linux" ]]; then #Using Linux
+  echo "Linux detected"
+  make build
+else
+  echo "Windows detected... or something else..." #Using Windows or MacOS
+  dotnet build
+fi
+}
 # Función para compilar y generar el PDF del informe
 report() {
   echo "Compilando y generando el PDF del informe..."
@@ -137,6 +146,7 @@ help(){
   echo "--show_report: |-sr  |  Visualizar el informe"
   echo "--show_slides: |-ss  |  Visualizar la presentación"
   echo "--clean:       |-c   |  Eliminar todos los ficheros auxiliares. Do it at my own risk :)"
+  echo "--build:       |-b   |  Compila el proyecto"
   #echo "--interactive  |-i   |  Interactuar con el script"
 }
 
@@ -225,6 +235,9 @@ for option in "$@"; do
             ;;
         --show_slides | -ss)
             show_slides
+            ;;
+        --build | -b)
+            build 
             ;;
 #        --interactive | -i)
 #            interactive
