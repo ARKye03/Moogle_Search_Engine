@@ -1,13 +1,16 @@
+%Class
 \documentclass{article}
+%Preamble
 \usepackage{graphicx}
 \usepackage[left=2.5cm, right=2.5cm, top=3cm, bottom=3cm]{geometry}
 \usepackage{url}
-\usepackage{highlightlatex}
-\usepackage{shadethm}
-\usepackage{tokcycle}
-\usepackage{tokenizer}
 \usepackage{enumerate}
 
+%Fonts
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+%Doc
 \begin{document}
 \title{Bienvenido a MOOGLE!}
 \author{Rafael Sánchez Martinez}
@@ -24,8 +27,6 @@
 Curso 2023-24
 
 Grupo: C-122
-
-Autor: Rafael A. Sánchez Martínez
 \end{quote}
 
 \section*{Features}\label{sec:ent}
@@ -63,7 +64,7 @@ Autor: Rafael A. Sánchez Martínez
             \fbox{dotnet watch run --project MoogleServer}
         \end{itemize}
     \item Inicio:
-        \begin{itemize}
+        \begin{enumerate}
             \item En la zona superior derecha elegir los modos(Oscuro, OscuroSólido, ClaroSólido).
             \item El programa inicia en \texttt{``Program.cs''}
             \begin{itemize}
@@ -74,7 +75,7 @@ Autor: Rafael A. Sánchez Martínez
             \end{itemize}
             \item 2.1 Aqui se le da paso al motor de busqueda, que tratará de crear el Diccionario "GeneralFiler" que contendrá todas las palabras de los documentos 'MASE Corpus -> Linea 4'
             \item 2.2 Tambien se creará el diccionario casi más relevante del proyecto, "Docs", que almacenará cada documento con sus datos 'MASE Corpus -> Linea 5'
-        \end{itemize}
+        \end{enumerate}
     \item Corpus:
         \begin{itemize}
             \item 3.1 Se ejecuta el constructor de esta clase:
