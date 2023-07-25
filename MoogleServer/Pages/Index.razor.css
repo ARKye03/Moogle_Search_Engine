@@ -2,6 +2,7 @@
 .results {
   clear: both;
   text-align: left;
+  width: 50vw;
   color: var(--Letteras);
   font-size: 18px;
 }

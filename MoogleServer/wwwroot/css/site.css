@@ -30,11 +30,12 @@ html, body {
     background-color: var(--MoogBackGColor);
 }
 .SearchBar{
+    width: 100%;
     position: relative;
     left: 40px;
 }
 .Searching{
-    width: 860px;
+    width: 40vw;
     float: var(--relocate_float);
     clear: var(--relocate_clear);
     position: var(--SearchingBoxPosition);
@@ -46,15 +47,16 @@ html, body {
     font-size: 17px;
     transform: scale(1.1,1.2);
     position: relative;
-    margin-top: 15px;
+    margin-top: 7px;
+    margin-bottom: 20px;
     width: 100%;
-    max-width: 700px;
     background: var(--SearchBoxBackGround);
     color: var(--Letteras);
     border: var(--SearchBoxBorder);
     border-color: var(--SearchBoxBorderColor);
     border-radius: 10px;
     padding: 10px 20px;
+    padding-right: 15px;
     transition: 100ms;
     accent-color: #002fff62;
 
@@ -83,16 +85,18 @@ html, body {
     filter: blur(2px);
 }
 .SearchButton{
-    position: relative;
-    right: 2.1rem;
-    transform: scale(0.6);
+    position: absolute;
+    top: 0;
+    right: -25px;
+    height: 100%;
+    transform: scale(0.7);
     background-color: rgba(255, 255, 255, 0);
     border: 0;
     border-radius: 10px;
     transition: 200ms;
 }
 .SearchButton:hover{
-    transform: scale(0.8);
+    transform: scale(0.9);
     transition: 100ms;
 }
 .BG{
