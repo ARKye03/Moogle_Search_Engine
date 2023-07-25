@@ -97,42 +97,28 @@ show_slides() {
     read -n 1 -s -r -p "Press any key to continue..."
   fi
 }
-# Función para limpiar los ficheros auxiliares
-clean() {
-  echo "Limpiando elementos del informe..."
-  echo "Limpiando archivos .aux..."
-  rm ../Informe/*.aux
-  echo "Limpiando archivos .log..."
-  rm ../Informe/*.log
-  echo "Limpiando archivos .fdb_latexmk..."
-  rm ../Informe/*.fdb_latexmk
-  echo "Limpiando archivos .fls..."
-  rm ../Informe/*.fls
-  echo "Limpiando archivos .synctex.gz..."
-  rm ../Informe/*.synctex.gz
-
-  echo "Limpiando elementos de la presentación..."
-  echo "Limpiando archivos .aux..."
-  rm ../Presentacion/*.aux
-  echo "Limpiando archivos .log..."
-  rm ../Presentacion/*.log
-  echo "Limpiando archivos .fdb_latexmk..."
-  rm ../Presentacion/*.fdb_latexmk
-  echo "Limpiando archivos .fls..."
-  rm ../Presentacion/*.fls
-  echo "Limpiando archivos .synctex.gz..."
-  rm ../Presentacion/*.synctex.gz
-
+clean(){
+  echo "Limpiando archivos extras..."
+  find ../ -type f -name "*.aux" -exec rm -v {} +
+  find ../ -type f -name "*.fdb_latexmk" -exec rm -v {} +
+  find ../ -type f -name "*.fls" -exec rm -v {} +
+  find ../ -type f -name "*.log" -exec rm -v {} +
+  find ../ -type f -name "*.syntex.gz" -exec rm -v {} +
+  find ../ -type f -name "*.pdf" -exec rm -v {} +
+  find ../ -type f -name "*.nav" -exec rm -v {} +
+  find ../ -type f -name "*.out" -exec rm -v {} +
+  find ../ -type f -name "*.snm" -exec rm -v {} +
+  find ../ -type f -name "*.toc" -exec rm -v {} +
   echo "Eliminando los ficheros objeto :|"
-  rm -r ../MoogleEngine/obj/
-  rm -r ../MoogleEngine/bin/
-  rm -r ../MoogleServer/obj/
-  rm -r ../MoogleServer/bin/
+  rm -v -r ../MoogleEngine/obj/ 
+  rm -v -r ../MoogleEngine/bin/ 
+  rm -v -r ../MoogleServer/obj/ 
+  rm -v -r ../MoogleServer/bin/
 
   sleep 1
-  clear
   echo "Limpieza completada"
   read -n 1 -s -r -p "Press any key to continue..."
+  clear
 }
 help(){
   clear

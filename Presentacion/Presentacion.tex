@@ -1,0 +1,37 @@
+\documentclass{beamer}
+
+%Preamble
+\usepackage{tikz}
+%Fonts
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\title{\includegraphics[width=105px,height=60px]{Assets/moogle_logo.png}}
+%\titlegraphic{\includegraphics[]{Assets/matcom_fac.jpg}}
+\subtitle{Discover what you seek: Instantly, Always.}
+\institute{MatCom}
+\author{Rafael Sanchez Martinez}
+\date{}
+
+%\usebackgroundtemplate{
+%  \begin{tikz}
+%  \includegraphics[width=\paperwidth,height=\paperheight]{Assets/matcom_fac.jpg}
+%}
+\usebackgroundtemplate{
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[opacity=0.2] at (current page.center) {\colorbox{gray}{\includegraphics[width=\paperwidth,height=\paperheight]{Assets/matcom_fac.jpg}}};
+  \end{tikzpicture}
+}
+
+
+\begin{document}
+  \maketitle
+
+  \include{Sections/Features}
+  \include{Sections/Index}
+  \include{Sections/Execution}
+  \include{Sections/Corpus}
+  \include{Sections/MASE}
+  \include{Sections/End}
+
+\end{document}

@@ -51,5 +51,3 @@ Then with bash or zsh execute to display info:
 
 - It won't work with only one archive in the "Content" folder.
 - Stay connected to Internet .Net might need some files to restore the project before final compile.
-
-### Project Info inside
