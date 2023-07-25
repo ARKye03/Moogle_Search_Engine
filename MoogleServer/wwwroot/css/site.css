@@ -6,8 +6,8 @@
 }
 :root{
     --SearchingBoxPosition: relative;
-    --SearchingBoxTop: 15rem;
-    --SearchingBoxLeft: 25rem;
+    --SearchingBoxTop: 25vh;
+    --SearchingBoxLeft: 25vw;
     --Letteras: #fff;
     --Background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.2)), url("../images/UnBlurredBG.jpg");
     --WallpaperGround: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.2)), url("../images/UnBlurredBG.jpg");
@@ -87,12 +87,13 @@ html, body {
 .SearchButton{
     position: absolute;
     top: 0;
-    right: -25px;
+    right: -35px;
     height: 100%;
     transform: scale(0.7);
     background-color: rgba(255, 255, 255, 0);
     border: 0;
     border-radius: 10px;
+    padding-bottom: 20px;
     transition: 200ms;
 }
 .SearchButton:hover{
