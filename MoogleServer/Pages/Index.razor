@@ -73,7 +73,7 @@
     //ChangeLayout
     private void Relocate()
     {
-        JSRuntime.InvokeVoidAsync("eval", $"document.documentElement.style.setProperty('--SearchingBoxTop', '{"0px"}'); document.documentElement.style.setProperty('--SearchingBoxLeft', '{"29rem"}')");
+        JSRuntime.InvokeVoidAsync("eval", $"document.documentElement.style.setProperty('--SearchingBoxTop', '{"0px"}'); document.documentElement.style.setProperty('--relocate_float', '{"left"}'); document.documentElement.style.setProperty('--relocate_clear', '{"both"}'); document.documentElement.style.setProperty('--SearchingBoxLeft', '{"0"}')");
     }
     //ChangeBG
     private void ChangeBG()

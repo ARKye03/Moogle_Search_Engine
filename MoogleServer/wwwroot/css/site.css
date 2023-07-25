@@ -7,7 +7,7 @@
 :root{
     --SearchingBoxPosition: relative;
     --SearchingBoxTop: 15rem;
-    --SearchingBoxLeft: 20px;
+    --SearchingBoxLeft: 25rem;
     --Letteras: #fff;
     --Background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.2)), url("../images/UnBlurredBG.jpg");
     --WallpaperGround: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.2)), url("../images/UnBlurredBG.jpg");
@@ -15,6 +15,8 @@
     --SearchBoxBorder: 0;
     --SearchBoxBorderColor: 0;
     --MoogBackGColor: #3b3f4d00;
+    --relocate_float: 0;
+    --relocate_clear: 0;
 }
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -32,9 +34,12 @@ html, body {
     left: 40px;
 }
 .Searching{
+    width: 860px;
+    float: var(--relocate_float);
+    clear: var(--relocate_clear);
     position: var(--SearchingBoxPosition);
     top: var(--SearchingBoxTop);
-    right: var(--SearchingBoxLeft);
+    left: var(--SearchingBoxLeft);
     transition: 300ms;
 }
 .SearchBox{
