@@ -7,6 +7,7 @@ fi
 #Vars
 folder_path="../Content"
 file_count=$(find "$folder_path" -type f | wc -l)
+visore=""
 # Run Moogle
 run() {
 if [[ $file_count -gt 1 ]]; then
@@ -63,18 +64,24 @@ show_report() {
   if [ ! -f "../Informe/Informe.pdf" ]; then
       report
   fi
-
-  if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    echo "Linux Detected"
-    xdg-open ../Informe/Informe.pdf 
-  elif [[ "$OSTYPE" == "darwin"* ]]; then
-    echo "macOS Detected"
-    open ../Informe/Informe.pdf 
-  elif [[ "$OSTYPE" == "msys"* ]]; then
-    echo "Windows Detected"
-    start ../Informe/Informe.pdf 
+  
+  if [ $# -eq 1 ]; then
+    visore="$1"
+    echo "Leyendo visualizador"
+    $visore ../Informe/Informe.pdf
   else
-    echo "No se pudo determinar el sistema operativo"
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+      echo "Linux Detected"
+      xdg-open ../Informe/Informe.pdf 
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+      echo "macOS Detected"
+      open ../Informe/Informe.pdf 
+    elif [[ "$OSTYPE" == "msys"* ]]; then
+      echo "Windows Detected"
+      start ../Informe/Informe.pdf 
+    else
+      echo "No se pudo determinar el sistema operativo"
+    fi
   fi
 }
 # Función para visualizar presentación
@@ -82,19 +89,24 @@ show_slides() {
   if [ ! -f "../Presentacion/Presentacion.pdf" ]; then
       slides
   fi
-
-  if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    echo "Linux Detected"
-    xdg-open ../Presentacion/Presentacion.pdf 
-  elif [[ "$OSTYPE" == "darwin"* ]]; then
-    echo "macOS Detected"
-    open ../Presentacion/Presentacion.pdf 
-  elif [[ "$OSTYPE" == "msys"* ]]; then
-    echo "Windows Detected"
-    start ../Presentacion/Presentacion.pdf 
+  if [ $# -eq 1 ]; then
+    visore="$1"
+    echo "Leyendo visualizador"
+    $visore ../Presentacion/Presentacion.pdf
   else
-    echo "No se pudo determinar el sistema operativo :("
-    read -n 1 -s -r -p "Press any key to continue..."
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+      echo "Linux Detected"
+      xdg-open ../Presentacion/Presentacion.pdf 
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+      echo "macOS Detected"
+      open ../Presentacion/Presentacion.pdf 
+    elif [[ "$OSTYPE" == "msys"* ]]; then
+      echo "Windows Detected"
+      start ../Presentacion/Presentacion.pdf 
+    else
+      echo "No se pudo determinar el sistema operativo :("
+      read -n 1 -s -r -p "Press any key to continue..."
+    fi
   fi
 }
 clean(){
@@ -122,17 +134,17 @@ clean(){
 }
 help(){
   clear
-  echo "Estas son tus opciones, pasalas como argumentos al script:"
+  echo "Estas son tus opciones, pásalas como argumentos al script:"
   echo "----------------------------------------------------------"
-  echo "--help:        |-h   |  Ayuda"
-  echo "--run:         |-r   |  Ejectutar el proyecto"
-  echo "--report:      |-re  |  Compilar y generar el pdf del proyecto latex relativo al informe"
-  echo "--slides:      |-sl  |  Compilar y generar el pdf del proyecto latex relativo a la presentación"
-  echo "--show_report: |-sr  |  Visualizar el informe"
-  echo "--show_slides: |-ss  |  Visualizar la presentación"
-  echo "--clean:       |-c   |  Eliminar todos los ficheros auxiliares. Do it at my own risk :)"
-  echo "--build:       |-b   |  Compila el proyecto"
-  echo "--interactive  |-i   |  Interactuar con el script"
+  echo "--help:                 |-h   |  Ayuda"
+  echo "--run:                  |-r   |  Compila y ejectutar el proyecto"
+  echo "--report:               |-re  |  Compilar y generar el pdf del proyecto latex relativo al informe"
+  echo "--slides:               |-sl  |  Compilar y generar el pdf del proyecto latex relativo a la presentación"
+  echo "--show_report <args>:   |-sr  |  Visualizar el informe <opcional>"
+  echo "--show_slides <args>:   |-ss  |  Visualizar la presentación <opcional>"
+  echo "--clean:                |-c   |  Eliminar todos los ficheros auxiliares. Do it at my own risk :)"
+  echo "--build:                |-b   |  Compila el proyecto"
+  echo "--interactive           |-i   |  Interactuar con el script"
 }
 
 interactive(){
@@ -172,11 +184,15 @@ while [[ $option != "salir" ]]; do
         4)
             slides
             ;;       
-        5)
-            show_report
+        5)  
+            echo
+            read -p "Con que lo deseas abrir: (Default=Aplicacion Predeterminada)" arg
+            show_report $arg
             ;;       
         6)
-            show_slides
+            echo
+            read -p "Con que lo deseas abrir: (Default=Aplicacion Predeterminada)" arg
+            show_slides $arg
             ;;       
         7)
             clean
@@ -227,10 +243,12 @@ for option in "$@"; do
             slides
             ;;
         --show_report | -sr)
-            show_report
+            shift
+            show_report "$@"
             ;;
         --show_slides | -ss)
-            show_slides
+            shift
+            show_slides "$@"
             ;;
         --build | -b)
             build 
