@@ -115,7 +115,7 @@ clean(){
   find ../ -type f -name "*.fdb_latexmk" -exec rm -v {} +
   find ../ -type f -name "*.fls" -exec rm -v {} +
   find ../ -type f -name "*.log" -exec rm -v {} +
-  find ../ -type f -name "*.syntex.gz" -exec rm -v {} +
+  find ../ -type f -name "*.synctex.gz" -exec rm -v {} +
   find ../ -type f -name "*.pdf" -exec rm -v {} +
   find ../ -type f -name "*.nav" -exec rm -v {} +
   find ../ -type f -name "*.out" -exec rm -v {} +
